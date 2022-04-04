@@ -1,0 +1,46 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+     <h3 class="text text-center"><p class="text-success">Registrar Usuario</p> </h3>
+    <form action="/Usuario/nuevo" method="post" enctype="multipart/form-data">
+        <div class="text text-center">
+              <h3>
+
+                 <label>Nombre Completo:</label>
+                  <input type="text" required  name="nombreCompleto" placeholder="Ingrese Nombre Completo" maxlength="40">
+                <br>
+                  <label>Nombre Usuario:</label>
+                  <input type="text" required  name="nombreUsuario" placeholder="Ingrese Nombre Usuario" maxlength="10">
+                <br>
+                  <label>Contraseña:</label>
+                  <input type="text" required  name="contraseña" placeholder="Ingrese Contraseña" maxlength="10">
+                <br>
+                  <label>Tipo Usuario:</label>
+                  <input type="text" name="tipoUsuario" required placeholder="Tipo Usuario" maxlength="15" >
+                <br>
+                  <label>Estatus:</label>
+                  <input type="text" required  name="estatus" placeholder="Ingrese el Estatus" maxlength="1">
+                <br>
+
+
+              </h3>
+              <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+              <a class="btn btn-primary btn-lg" href="/Usuario" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+        </div>
+
+
+
+    </form>
+    {% if get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+       </div>
+
+    {% endif %}
+{% endblock %}

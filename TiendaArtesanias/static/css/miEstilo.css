@@ -1,0 +1,40 @@
+
+/* Remove the navbar's default rounded borders and increase the bottom margin */
+
+    .navbar {
+      margin-bottom:0;
+      padding:0;
+      border-radius: 0;
+      background-color: #66280a
+
+    }
+
+
+    .colorTexNavBar{
+           color: white !important;
+    }
+
+    /* Remove the jumbotron's default bottom margin */
+     .jumbotron {
+      margin-bottom: 0;
+      background-color: #d0ab7a
+
+    }
+
+
+main{
+    margin:0;
+    padding:0;
+    background-image: url('../imagenes/plantaroja.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 60;
+    color: black;
+
+}
+
+footer {
+      background-color: #c45824;
+      padding: 25px;
+      color: white;
+    }

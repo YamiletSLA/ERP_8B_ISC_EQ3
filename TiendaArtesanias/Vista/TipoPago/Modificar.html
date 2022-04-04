@@ -1,0 +1,44 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,tipo){
+    resp=confirm("¿Estas seguro de eliminar el Tipo de pago "+  tipo  +" ?");
+        if(resp==true){
+        location.href="/TipoPago/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Tipo de Pago</p></h3>
+    <form action="/TipoPago/Modificar" method="post" enctype="multipart/form-data">
+         <div class="text text-center">
+              <h3>
+                    <label>Id Tipo Pago:</label>
+                        <input type="number" name="Id" readonly value="{{tipopa.idTipoPago}}" >
+                   <br>
+                   <label>Tipo:</label>
+                        <input type="text" required  name="tipo"  placeholder="Ingrese Tipo de Usuario" value="{{tipopa.tipo}}" maxlength="10">
+                   <br>
+
+              </h3>
+
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+
+
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{tipopa.idTipoPago}},'{{tipopa.tipo}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+
+             <a class="btn btn-primary btn-lg" href="/TipoPago" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
