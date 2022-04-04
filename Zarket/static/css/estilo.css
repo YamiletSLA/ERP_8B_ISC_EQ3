@@ -85,11 +85,11 @@ height: 45px;
 
 .btnP-almacen{
 background-color: #8095ce;
-background-image: url('../img/Alm2.png');
+background-image: url('../img/Alm.png');
 color:#FFF;
 border-color: #ffffff;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 border-radius: 8px;
 }
 
@@ -98,8 +98,8 @@ background-color: #90c4e9;
 background-image: url('../img/Usu.png');
 color:#FFF;
 border-color: #ffffff;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 border-radius: 8px;
 }
 
@@ -108,8 +108,8 @@ background-color: #90c4e9;
 background-image: url('../img/Ven.png');
 color:#FFF;
 border-color: #ffffff;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 border-radius: 8px;
 }
 
@@ -118,8 +118,8 @@ background-color: #90c4e9;
 background-image: url('../img/Rep.png');
 color:#FFF;
 border-color: #ffffff;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 border-radius: 8px;
 }
 
@@ -128,8 +128,8 @@ background-color: #90c4e9;
 background-image: url('../img/Pago.png');
 color:#FFF;
 border-color: #ffffff;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 border-radius: 8px;
 }
 
@@ -149,23 +149,23 @@ label{
 .relative1 {
   position: relative;
   left: 450px;
-  bottom: 300px;
+  bottom: 250px;
 }
 
 .relative2 {
   position: relative;
   left: 800px;
-  bottom: 500px;
+  bottom: 400px;
 }
 
 .relative3 {
   position: relative;
   left: 450px;
-  bottom: 450px;
+  bottom: 300px;
 }
 
 .relative4 {
   position: relative;
   left: 800px;
-  bottom: 650px;
+  bottom: 450px;
 }
