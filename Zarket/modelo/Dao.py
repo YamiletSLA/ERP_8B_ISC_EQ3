@@ -130,6 +130,12 @@ class Usuario(UserMixin,db.Model):
             return usuario
         else:
             return None
+    def isValid(self,nomUsu,password):
+        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.password_hash==password).first()
+        if usuario != None and usuario.is_active():
+            return usuario
+        else:
+            return None
     #Método para agregar una cuenta de usuario
     def agregar(self):
         db.session.add(self)
@@ -150,6 +156,24 @@ class Usuario(UserMixin,db.Model):
         usuario = self.consultaIndividual(id)
         usuario.estatus = 'I'
         usuario.editar()
+
+    def is_admin(self):
+        if self.idTipoUsuario == '1':
+            return True
+        else:
+            return False
+
+    def is_vendedor(self):
+        if self.idTipoUsuario == '2':
+            return True
+        else:
+            return False
+
+    def is_almacenista(self):
+        if self.idTipoUsuario == '3':
+            return True
+        else:
+            return False
 
 
 
@@ -177,23 +201,7 @@ class TipoUsuario(db.Model):
         db.session.delete(cat)
         db.session.commit()
 
-    def is_admin(self):
-        if self.tipo == 'Administrador':
-            return True
-        else:
-            return False
 
-    def is_vendedor(self):
-        if self.tipo == 'Vendedor':
-            return True
-        else:
-            return False
-
-    def is_almacenista(self):
-        if self.tipo == 'Almacenista':
-            return True
-        else:
-            return False
 
 class Paqueterias(db.Model):
     __tablename__='paqueterias'

@@ -5,26 +5,33 @@
 {% endblock %}
 {% block contenido %}
     {{super()}}
-    {%if current_user.is_authenticated %}
-
-        <span style="font-color: #FFFFFF; font-size: 40pt; FONT-FAMILY: Helvetica;"></span>
-        </p>
+    {%if current_user.is_authenticated and current_user.is_admin() %}
     {% endif %}
-    <img src="{{url_for('static',filename='img/Zorro.png')}}" alt="Zorro" width="400" height="400" style="float:right">
     <br>
     <br>
     <br>
     <br>
 
-    <div style="text-align: center; FONT-SIZE: 8pt">
-        <a href="/productos" class="btn btn-default">
-        <span style="font-color: #FFFFFF; font-size: 50pt; FONT-FAMILY: Helvetica;">Productos</span>
-        </a>
-    </div>
     <br>
-    <div style="text-align: center;">
-        <a href="/Usuarios/iniciarSesion" class="btn btn-default2"  >
-            <span style="font-color: #FFFFFF; font-size: 50pt; FONT-FAMILY: Helvetica;">Iniciar Sesion</span>
+    <div style="text-align: left;">
+        <a href="/Almacen" class="btn btnP-almacen"  >
         </a>
     </div>
+     <div class="relative1">
+        <a href="/Usuarios" class="btn btnP-usuario"  >
+        </a>
+    </div>
+    <div class="relative2">
+        <a href="/Usuarios" class="btn btnP-ventas"  >
+        </a>
+    </div>
+    <div class="relative3">
+        <a href="/Usuarios" class="btn btnP-reportes"  >
+        </a>
+    </div>
+    <div class="relative4">
+        <a href="/Usuarios" class="btn btnP-pagos"  >
+        </a>
+    </div>
+
 {% endblock %}

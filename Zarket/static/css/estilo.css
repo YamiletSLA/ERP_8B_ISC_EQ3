@@ -31,11 +31,11 @@ h2{
 }
 
 header{
-    background: black;
-    background-image: url('../img/Zorro.png');
+    background: #5c397d;
+    background-image: url('../img/LogMin.png');
     background-size: contain;
     background-repeat:no-repeat;
-    height: 50%;
+    height: 100%;
     margin: 0%;
     padding-top:1%;
     padding-bottom: 1%;
@@ -43,6 +43,7 @@ header{
 }
 nav{
     margin-top:0%;
+     background-color:#8869a5;
 }
 body{
     background-color:#FFFFFF;
@@ -60,6 +61,7 @@ th{
 carac.{
     color: black;
 }
+
 .btn-default
 {
 background-color: #7C8683;
@@ -81,6 +83,56 @@ height: 45px;
    background-color: #755A8F;
 }
 
+.btnP-almacen{
+background-color: #8095ce;
+background-image: url('../img/Alm2.png');
+color:#FFF;
+border-color: #ffffff;
+width: 200px;
+height: 200px;
+border-radius: 8px;
+}
+
+.btnP-usuario{
+background-color: #90c4e9;
+background-image: url('../img/Usu.png');
+color:#FFF;
+border-color: #ffffff;
+width: 200px;
+height: 200px;
+border-radius: 8px;
+}
+
+.btnP-ventas{
+background-color: #90c4e9;
+background-image: url('../img/Ven.png');
+color:#FFF;
+border-color: #ffffff;
+width: 200px;
+height: 200px;
+border-radius: 8px;
+}
+
+.btnP-reportes{
+background-color: #90c4e9;
+background-image: url('../img/Rep.png');
+color:#FFF;
+border-color: #ffffff;
+width: 200px;
+height: 200px;
+border-radius: 8px;
+}
+
+.btnP-pagos{
+background-color: #90c4e9;
+background-image: url('../img/Pago.png');
+color:#FFF;
+border-color: #ffffff;
+width: 200px;
+height: 200px;
+border-radius: 8px;
+}
+
 .caja
 {
 font-size: 36px;
@@ -92,4 +144,28 @@ background:#212F3C
 label{
   display: inline-block;
   width: 80px;
+}
+
+.relative1 {
+  position: relative;
+  left: 450px;
+  bottom: 300px;
+}
+
+.relative2 {
+  position: relative;
+  left: 800px;
+  bottom: 500px;
+}
+
+.relative3 {
+  position: relative;
+  left: 450px;
+  bottom: 450px;
+}
+
+.relative4 {
+  position: relative;
+  left: 800px;
+  bottom: 650px;
 }

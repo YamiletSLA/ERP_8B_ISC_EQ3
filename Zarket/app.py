@@ -5,6 +5,7 @@ from flask import Flask,render_template,request,redirect,url_for,flash,session,a
 from flask_bootstrap import Bootstrap
 from modelo.Dao import db, Categoria, Producto, Usuario, TipoUsuario, Paqueterias, Pedidos, DetallePedidos
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
+
 import json
 
 app = Flask(__name__)
@@ -68,8 +69,9 @@ def agregarUsuario():
 def login():
     nombreUsuario=request.form['nomUsu']
     password=request.form['password']
+    print ("user:"+nombreUsuario+" pwd:"+password)
     usuario=Usuario()
-    user=usuario.validar(nombreUsuario,password)
+    user=usuario.isValid(nombreUsuario,password)
     if user!=None:
         login_user(user)
         return render_template('Principal.html')

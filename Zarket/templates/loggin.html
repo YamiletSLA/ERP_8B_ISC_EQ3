@@ -1,10 +1,7 @@
-{% extends 'comunes/base.html' %}
+{% extends 'comunes/base2.html' %}
 {% block contenido %}
     {{super()}}
-    {%if current_user.is_authenticated %}
-        <span style="font-color: #FFFFFF; font-size: 40pt; FONT-FAMILY: Helvetica;"></span>
-        </p>
-    {% endif %}
+
     <div style="padding-left: 250pt;">
         <img src="{{url_for('static',filename='img/LogoZarket.png')}}" alt="LogoZarket" width="500" height="200">
         <br>
@@ -28,9 +25,6 @@
 
     <div style="padding-left: 370pt;">
         <input class="btn btn-default2" type="submit" value="Iniciar sesión">
-        <!--<a class="btn btn-default2"  >
-            <span style=" font-size: 18pt; FONT-FAMILY: Helvetica;">Iniciar Sesion</span>
-        </a>-->
     </div>
 <br>
 </form>
