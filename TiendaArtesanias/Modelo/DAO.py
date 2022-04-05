@@ -32,10 +32,10 @@ class TipoPago(db.Model):
 class Usuario(db.Model):
     __tablename__ = 'Usuario'
     idUsuario = Column(Integer, primary_key=True)
-    idTipoUsuario = Column(Integer, ForeignKey('TipoUsuario.idTipoUsuario'))
+
     nombreCompleto = Column(String, nullable=False)
     nombreUsuario = Column(String, nullable=False)
-    password_hash = Column(String(128), nullable=False)
+    contraseña = Column(String(128), nullable=False)
     estatus = Column(String, nullable=False)
 
     def is_authenticated(self):
@@ -53,7 +53,7 @@ class Usuario(db.Model):
         return self.idUsuario
 
     def isValid(self,nomUsu,password):
-        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.password_hash==password).first()
+        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.contraseña==password).first()
         if usuario != None and usuario.is_active():
             return usuario
         else:
@@ -77,4 +77,3 @@ class Usuario(db.Model):
 
     def consultaGeneral(self):
         return self.query.all()
-
