@@ -31,13 +31,33 @@ class TipoPago(db.Model):
 
 class Usuario(db.Model):
     __tablename__ = 'Usuario'
-    idUsuario=Column(Integer, primary_key=True)
-    nombreCompleto = Column(String(40))
-    nombreUsuario=Column(String(10))
-    contraseña=Column(String(10))
-    tipoUsuario=Column(String(15))
-    estatus=Column(String(1))
+    idUsuario = Column(Integer, primary_key=True)
+    idTipoUsuario = Column(Integer, ForeignKey('TipoUsuario.idTipoUsuario'))
+    nombreCompleto = Column(String, nullable=False)
+    nombreUsuario = Column(String, nullable=False)
+    password_hash = Column(String(128), nullable=False)
+    estatus = Column(String, nullable=False)
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        if self.estatus=='A':
+            return True
+        else:
+            return False
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.idUsuario
+
+    def isValid(self,nomUsu,password):
+        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.password_hash==password).first()
+        if usuario != None and usuario.is_active():
+            return usuario
+        else:
+            return None
 
     def insertar(self):
         db.session.add(self)
@@ -57,3 +77,4 @@ class Usuario(db.Model):
 
     def consultaGeneral(self):
         return self.query.all()
+
