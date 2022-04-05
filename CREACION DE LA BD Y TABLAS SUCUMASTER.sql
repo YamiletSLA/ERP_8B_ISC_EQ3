@@ -1,3 +1,4 @@
+
 /*Creacion de la BD sucumaster*/
 create database sucumaster;
 use sucumaster;
@@ -28,11 +29,6 @@ RFC varchar(13) not null,
 constraint pk_Cliente primary key (idCliente)
 );
 
-create table TipoUsuario (
-idTipoUsuario int auto_increment not null,
-tipo varchar(10) not null,
-constraint pk_TipoUsuario primary key (idTipoUsuario)
-);
 
 create table Categorias (
 idCategorias int auto_increment not null,
@@ -58,11 +54,9 @@ idUsuario int auto_increment not null,
 nombreCompleto varchar(40) not null,
 nombreUsuario varchar(10) not null,
 contraseña varchar(10) not null,
+tipoUsuario varchar(15) not null,
 estatus varchar(1) not null,
-idTipoUsuario int not null,
-constraint pk_Usuario primary key (idUsuario),
-constraint fk_TipoUsuario_Usuario foreign key(idTipoUsuario) 
-references TipoUsuario(idTipoUsuario)
+constraint pk_Usuario primary key (idUsuario)
 );
 
 create table Ventas (
@@ -189,3 +183,8 @@ references Almacen(idAlmacen),
 constraint fk_Productos_ReporteAlmacen foreign key(idProducto) 
 references Productos(idProducto)
 );
+
+/*use sucumaster;
+create user userSucuMaster identified by 'hola.123';
+grant insert,update,delete,select on TipoPago to userSucuMaster;
+*/
