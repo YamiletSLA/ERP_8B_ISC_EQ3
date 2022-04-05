@@ -1,0 +1,21 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    Zarket
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% block contenido %}
+        <!--Sistema de alertas de Bootstrap -->
+       {% if get_flashed_messages() %}
+       <div class="alert alert-warning alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+           <strong>
+               {% for msg in get_flashed_messages() %}
+                    {{msg}}
+               {% endfor %}
+           </strong>
+        </div>
+       {% endif %}
+    {% endblock %}
+</div>
+{% endblock %}

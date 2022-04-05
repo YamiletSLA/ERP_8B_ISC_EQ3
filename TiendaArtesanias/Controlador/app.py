@@ -1,3 +1,6 @@
+from datetime import timedelta
+from urllib import request
+
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
 from Modelo.DAO import db, TipoPago, Usuario
@@ -5,17 +8,31 @@ from flask_login import current_user,login_user,logout_user, login_manager,login
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
-
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='cl4v3'
 
+log_manager=LoginManager()
+log_manager.init_app(app)
+log_manager.login_view='mostrar_login'
+log_manager.login_message='¡ Tu sesión expiró !'
+log_manager.login_message_category="info"
 
 
 @app.route('/')
 def inicio():
-    return render_template('comunes/Principal.html')
+    return render_template('loggin.html')
+
+@app.route('/Usuarios/iniciarSesion')
+def mostrar_login():
+    if current_user.is_authenticated:
+        return render_template('comunes/Principal.html')
+    else:
+        return render_template('usuarios/loggin.html')
+
+@log_manager.user_loader
+def cargar_usuario(id):
+    return Usuario.query.get(int(id))
 
 @app.route('/Usuario')
 def Usuarios():
@@ -32,7 +49,7 @@ def nuevoUsuario():
     us= Usuario()
     us.nombreCompleto = request.form['nombreCompleto']
     us.nombreUsuario = request.form['nombreUsuario']
-    us.contraseña = request.form['contraseña']
+    us.password_hash = request.form['contraseña']
     us.tipoUsuario= request.form['tipoUsuario']
     us.estatus = request.form['estatus']
 
@@ -44,6 +61,21 @@ def nuevoUsuario():
 def ConsultaIndUsuario(id):
     us = Usuario()
     return render_template('Usuario/Modificar.html',user=us.consultaIndividual(id))
+
+@app.route("/validarSesion",methods=['POST'])
+def login():
+    nombreUsuario=request.form['nomUsu']
+    password=request.form['password']
+    print ("user:"+nombreUsuario+" pwd:"+password)
+    usuario=Usuario()
+    user=usuario.isValid(nombreUsuario,password)
+    if user!=None:
+        login_user(user)
+        return render_template('comunes/Principal.html')
+    else:
+        flash('Nombre de usuario o contraseña incorrectos')
+        return render_template('loggin.html')
+
 
 @app.route('/Usuario/Modificar',methods=['post'])
 def ModificarUsuario():
