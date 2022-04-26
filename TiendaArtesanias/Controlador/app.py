@@ -8,7 +8,7 @@ from flask_login import current_user,login_user,logout_user, login_manager,login
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='cl4v3'
 
