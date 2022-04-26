@@ -39,18 +39,3 @@ footer {
       color: white;
     }
 
-.btn-default2
-{
-background-color: #8869A5;
-color:#FFF;
-border-color: #8869A5;
-text-align: center;
-font-size: 15pt;
-width: 200px;
-height: 45px;
-}
-
-.btn-default2:hover {
-   color: #FFF;
-   background-color: #755A8F;
-}

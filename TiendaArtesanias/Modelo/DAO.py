@@ -155,3 +155,59 @@ class Estante(db.Model):
 
     def consultaGeneral(self):
         return self.query.all()
+
+#########REPORTES#######
+class Almacen(db.Model):
+    __tablename__='almacen'
+    idAlmacen = Column(Integer, primary_key=True)
+    cantProducto = Column(Integer,nullable=False)
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
+    idEstante = Column(Integer, ForeignKey('Estantes.idEstante'))
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def eliminar(self,id):
+        obj = self.consultaIndividual(id)
+        db.session.delete(obj)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+class ReporteAlmacen(db.Model):
+    __tablename__ = 'reportealmacen'
+    idReporteAlmacen = Column(Integer, primary_key=True)
+    fecha = Column(String, nullable=False)
+    descripcion = Column(String, nullable=False)
+    movimiento = Column(String, nullable=False)
+    cantidad = Column(String, nullable=False)
+    idAlmacen = Column(Integer, ForeignKey('almacen.idAlmacen'))
+    idProducto = Column(Integer, ForeignKey('productos.idProducto'))
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def eliminar(self,id):
+        obj = self.consultaIndividual(id)
+        db.session.delete(obj)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()

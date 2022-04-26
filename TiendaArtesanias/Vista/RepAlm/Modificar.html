@@ -1,0 +1,63 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}}
+<Script>
+    function eliminar(Id,nombre){
+    resp=confirm("¿Estas seguro de eliminar el Estante "+  nombre  +" ?");
+        if(resp==true){
+        location.href="/Reporte/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Reporte</p></h3>
+    <form action="/Reporte/Modificar" method="post" enctype="multipart/form-data">
+         <div class="text text-center">
+            <h3>
+                    <label>ID:</label>
+                        <input type="number" name="idReporteAlmacen" readonly value="{{repor.idReporteAlmacen}}" >
+                   <br>
+                   <label>fecha:</label>
+                        <input type="date" required  name="fecha"  placeholder="Ingrese fecha de reporte" value="{{repor.fecha}}" maxlength="40">
+                   <br>
+                   <label>Descripción:</label>
+                        <input type="text" required  name="descripcion"  placeholder="Ingrese una descripcion" value="{{repor.descripcion}}" maxlength="10">
+                   <br>
+                   <label>Movimiento</label>
+                        <input type="text" required  name="movimiento"  placeholder="Movimiento" value="{{repor.movimiento}}" maxlength="10">
+                   <br>
+                  <label>Cantidad:</label>
+                        <input type="text" name="cantidad" placeholder="Ingrese cantidad"  value="{{repor.cantidad}}" maxlength="15" >
+                   <br>
+                  <br>
+                   <label>Almacen</label>
+                        <input type="number" required  name="idAlmacen"  placeholder="Ingrese almacen" value="{{repor.idAlmacen}}" maxlength="1">
+                   <br>
+                  <br>
+                   <label>Producto</label>
+                        <input type="number" required  name="idProducto"  placeholder="Ingrese producto" value="{{repor.idProducto}}" maxlength="1">
+                   <br>
+            </h3>
+
+
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+
+
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{repor.idReporteAlmacen}},'{{repor.movimiento}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+
+             <a class="btn btn-primary btn-lg" href="/Reporte" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
