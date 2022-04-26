@@ -1,0 +1,40 @@
+
+{% extends "comunes/base.html" %}
+{% block navbar %}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+<h3 class="text text-center"><p class="text-success">Productos</p></h3>
+<div class="text text-center">
+</div>
+
+        <a class="btn btn-primary btn-lg" href="/Productos/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+
+<h4>
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <th>Id Producto</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>idCategorias</th>
+            <th>editar</th>
+
+        </thead>
+        {% for produc in productos%}
+                <tr>
+                    <td>{{produc.idProducto}}</td>
+                    <td>{{produc.nombre}}</td>
+                    <td>{{produc.descripcion}}</td>
+                    <td>{{produc.precio}}</td>
+                    <td>{{produc.idCategorias}}</td>
+
+                    <td><a href="/Productos/Ver/{{produc.idProducto}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                </tr>
+             {% endfor %}
+
+    </table>
+</h4>
+<a class="btn btn-primary btn-lg" href="/" role="button">Regresar</a>
+{% endblock %}

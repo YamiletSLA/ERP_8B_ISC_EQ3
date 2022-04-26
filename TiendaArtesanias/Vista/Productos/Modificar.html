@@ -1,0 +1,53 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,nombre){
+    resp=confirm("¿Estas seguro de eliminar el producto "+  nombre  +" ?");
+        if(resp==true){
+        location.href="/productos/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Producto</p></h3>
+    <form action="/Productos/Modificar" method="post" enctype="multipart/form-data">
+         <div class="text text-center">
+              <h3>
+                    <label>Id Producto:</label>
+                        <input type="number" name="idProducto" readonly value="{{produc.idProducto}}" >
+                   <br>
+                   <label>Nombre:</label>
+                        <input type="text" required  name="nombre"  placeholder="Ingrese nombre del producto" value="{{produc.nombre}}" maxlength="20">
+                   <br>
+                   <label>Descripción:</label>
+                        <input type="text" required  name="descripcion"  placeholder="Descripción" value="{{produc.descripcion}}" maxlength="50">
+                   <br>
+                   <label>Precio</label>
+                        <input type="text" required  name="precio"  placeholder="Precio" value="{{produc.precio}}" >
+                   <br>
+                  <label>Id Categorias:</label>
+                        <input type="text" name="idCategorias" readonly value="{{produc.idCategorias}}" >
+                   <br>
+
+              </h3>
+
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+
+
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{produc.idProducto}},'{{produc.nombre}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+
+             <a class="btn btn-primary btn-lg" href="/Productos" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}

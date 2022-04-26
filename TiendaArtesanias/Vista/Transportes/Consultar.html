@@ -1,0 +1,36 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+<h3 class="text text-center"><p class="text-success">Transportes </p></h3>
+<div class="text text-center">
+</div>
+
+        <a class="btn btn-primary btn-lg" href="/Transportes/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+
+<h4>
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <th>Id Transporte</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Estatus</th>
+            <th>Modificar</th>
+        </thead>
+        {% for trans in transportes %}
+                <tr>
+                    <td>{{trans.idTransportes}}</td>
+                    <td>{{trans.nombre}}</td>
+                    <td>{{trans.telefono}}</td>
+                    <td>{{trans.estatus}}</td>
+
+                    <td><a href="/Transportes/Ver/{{trans.idTransportes}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                </tr>
+        {% endfor %}
+
+    </table>
+</h4>
+<a class="btn btn-primary btn-lg" href="/" role="button">Regresar</a>
+{% endblock %}

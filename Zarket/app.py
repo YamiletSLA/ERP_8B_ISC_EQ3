@@ -141,8 +141,8 @@ def modificarUsuario():
             flash('¡ Usuario editado con exito !')
         except:
             flash('¡ Error al editar el usuario !')
-        if user.tipo == 'Comprador':
-            return redirect(url_for('consultarClientes'))
+            if user.tipo == 'Comprador':
+                return redirect(url_for('consultarClientes'))
         else:
             if user.tipo == 'Vendedor':
                 return redirect(url_for('consultarVendedores'))

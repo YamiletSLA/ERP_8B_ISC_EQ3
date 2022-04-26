@@ -3,7 +3,7 @@ from urllib import request
 
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -23,13 +23,14 @@ log_manager.login_message_category="info"
 def inicio():
     return render_template('loggin.html')
 
+
 @app.route('/Usuarios/iniciarSesion')
 def mostrar_login():
     if current_user.is_authenticated:
         return render_template('comunes/Principal.html')
     else:
         return render_template('usuarios/loggin.html')
-
+####usuarios/loggin.html
 @log_manager.user_loader
 def cargar_usuario(id):
     return Usuario.query.get(int(id))
@@ -111,7 +112,6 @@ def RegistrarTipoPago():
 @app.route('/TipoPago/nuevo',methods=['post'])
 def nuevoTipoPago():
     ti = TipoPago()
-
     ti.tipo = request.form['tipo']
     ti.insertar()
     flash('Tipo de Pago registrado con exito')
@@ -136,6 +136,142 @@ def eliminarTipoPago(id):
     ti=TipoPago()
     ti.eliminar(id)
     return redirect(url_for("TiposPago"))
+
+############Transportes
+
+@app.route('/Transportes')
+def consultaGeneralTransportes():
+    t=Transportes()
+    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral())
+
+@app.route('/Transportes/Registrar')
+def RegistrarTransporte():
+    return render_template('Transportes/Registrar.html')
+
+@app.route('/Transportes/nuevo',methods=['post'])
+def nuevoTransporte():
+    t = Transportes()
+    t.nombre = request.form['nombre']
+    t.telefono=request.form['telefono']
+    t.estatus=request.form['estatus']
+    t.insertar()
+    flash('Transporte registrado con exito')
+    return render_template('Transportes/Registrar.html')
+
+@app.route('/Transportes/Ver/<int:id>')
+def ConsultaIndTransportes(id):
+    t = Transportes()
+    return render_template('Transportes/Modificar.html',trans=t.consultaIndividual(id))
+
+@app.route('/Transportes/Modificar',methods=['post'])
+def ModificarTransportes():
+    t= Transportes()
+    t.idTipoPago = request.form['Id']
+    t.nombre = request.form['nombre']
+    t.telefono=request.form['telefono']
+    t.estatus=request.form['estatus']
+
+    t.actualizar()
+    flash('La modificación del Transporte se realizó con exito')
+    return render_template('Transportes/Modificar.html',trans=t)
+
+@app.route('/Transportes/eliminar/<int:id>')
+def eliminarTransporte(id):
+    t=Transportes()
+    t.eliminar(id)
+    return render_template('Transportes/Consultar.html', trans=t)
+
+##################
+
+@app.route('/Productos')
+def ConsultaGeneralProductos():
+    pr=Productos()
+    productos=pr.consultaGeneral()
+    return render_template('Productos/Consultar.html',productos=productos)
+
+@app.route('/Productos/Registrar')
+def RegistrarNuevoProductos():
+    return render_template('Productos/Registrar.html')
+
+@app.route('/Productos/nuevo',methods=['post'])
+def nuevoProductos():
+    pr= Productos()
+    pr.nombre = request.form['nombre']
+    pr.descripcion = request.form['descripcion']
+    pr.precio = request.form['precio']
+    pr.idCategorias= request.form['idCategorias']
+
+    pr.insertar()
+    flash('Producto registrado con exito')
+    return render_template('Productos/Registrar.html')
+
+@app.route('/Productos/Ver/<int:id>')
+def ConsultaIndProductos(id):
+    pr = Productos()
+    return render_template('Productos/Modificar.html',produc=pr.consultaIndividual(id))
+
+@app.route('/Productos/Modificar',methods=['post'])
+def ModificarProduct():
+    pr=Productos()
+    pr.idProducto = request.form['idProducto']
+    pr.nombre = request.form['nombre']
+    pr.descripcion = request.form['descripcion']
+    pr.precio = request.form['precio']
+    pr.idCategorias = request.form['idCategorias']
+    pr.actualizar()
+    flash('La modificación del producto se realizó con exito')
+    return render_template('Productos/Modificar.html',produc=pr)
+
+
+@app.route('/Productos/eliminar/<int:id>')
+def eliminarProductos(id):
+    pr=Productos()
+    pr.eliminar(id)
+    return render_template('Productos/Consultar.html',prod=pr)
+
+
+################ESTANTE
+
+@app.route('/Estante')
+def ConsultaDeEstante():
+    est=Estante()
+    estante=est.consultaGeneral()
+    return render_template('Estante/Consultar.html',estante=estante)
+
+@app.route('/Estante/Registrar')
+def RegistrarNuevoEstante():
+    return render_template('Estante/Registrar.html')
+
+@app.route('/Estante/nuevo',methods=['post'])
+def RegistroNuevoEstante():
+    est= Estante()
+    est.nombre = request.form['nombre']
+    est.ubicacion = request.form['ubicacion']
+
+    est.insertar()
+    flash('Estante registrado con exito')
+    return render_template('Estante/Registrar.html')
+
+@app.route('/Estante/Ver/<int:id>')
+def ConsultaIndEstante(id):
+    est = Estante()
+    return render_template('Estante/Modificar.html',estant=est.consultaIndividual(id))
+
+@app.route('/Estante/Modificar',methods=['post'])
+def ModificacionDeEstante():
+    est=Estante()
+    est.idEstante = request.form['idEstante']
+    est.nombre = request.form['nombre']
+    est.ubicacion = request.form['ubicacion']
+    est.actualizar()
+    flash('La modificación del estante se realizó con exito')
+    return render_template('Estante/Modificar.html',estant=est)
+
+@app.route('/Estante/eliminar/<int:id>')
+def eliminarEstantes(id):
+    est=Estante()
+    est.eliminar(id)
+    return render_template('Estante/Consultar.html',esta=est)
 
 
 if __name__=='__main__':

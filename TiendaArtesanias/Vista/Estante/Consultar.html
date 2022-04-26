@@ -1,0 +1,35 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+<h3 class="text text-center"><p class="text-success">Estante</p></h3>
+<div class="text text-center">
+</div>
+
+        <a class="btn btn-primary btn-lg" href="/Estante/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+
+<h4>
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <th>Id Estante</th>
+            <th>Nombre </th>
+            <th>Ubicación</th>
+            <th>Editar</th>
+        </thead>
+        {% for estant in estante%}
+                <tr>
+                    <td>{{estant.idEstante}}</td>
+                    <td>{{estant.nombre}}</td>
+                    <td>{{estant.ubicacion}}</td>
+
+                    <td><a href="/Estante/Ver/{{estant.idEstante}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                </tr>
+             {% endfor %}
+
+    </table>
+</h4>
+<a class="btn btn-primary btn-lg" href="/" role="button">Regresar</a>
+
+{% endblock %}

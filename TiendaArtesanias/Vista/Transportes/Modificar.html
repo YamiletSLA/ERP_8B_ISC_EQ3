@@ -1,0 +1,51 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,nombre){
+    resp=confirm("¿Estas seguro de eliminar el Transporte "+  nombre  +" ?");
+        if(resp==true){
+        location.href="/Transportes/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Transporte</p></h3>
+    <form action="/Transportes/Modificar" method="post" enctype="multipart/form-data">
+         <div class="text text-center">
+              <h3>
+                    <label>Id Transporte:</label>
+                        <input type="number" name="idTransportes" readonly value="{{trans.idTransportes}}" >
+                   <br>
+                   <label>Nombre:</label>
+                        <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{trans.nombre}}" maxlength="20">
+                   <br>
+                   <label>Telefono:</label>
+                        <input type="text" required  name="telefono"  placeholder="Ingrese el Telefono" value="{{trans.telefono}}" maxlength="10">
+                   <br>
+
+                   <label>Estatus</label>
+                        <input type="text" required  name="estatus"  placeholder="Ingrese estatus" value="{{trans.estatus}}" maxlength="1">
+                   <br>
+
+              </h3>
+
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+
+
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{trans.idTransportes}},'{{trans.nombre}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+
+             <a class="btn btn-primary btn-lg" href="/Transportes" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
