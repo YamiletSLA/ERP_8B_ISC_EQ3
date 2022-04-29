@@ -9,8 +9,9 @@
 <div class="text text-center">
 </div>
 
+        {%if current_user.is_authenticated and current_user.is_administrador()%}
         <a class="btn btn-primary btn-lg" href="/Productos/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
-
+        {% endif %}
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
@@ -19,7 +20,9 @@
             <th>Descripción</th>
             <th>Precio</th>
             <th>idCategorias</th>
+            {%if current_user.is_authenticated and current_user.is_administrador()%}
             <th>editar</th>
+            {% endif %}
 
         </thead>
         {% for produc in productos%}
@@ -30,7 +33,9 @@
                     <td>{{produc.precio}}</td>
                     <td>{{produc.idCategorias}}</td>
 
+                    {%if current_user.is_authenticated and current_user.is_administrador()%}
                     <td><a href="/Productos/Ver/{{produc.idProducto}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                    {% endif %}
                 </tr>
              {% endfor %}
 

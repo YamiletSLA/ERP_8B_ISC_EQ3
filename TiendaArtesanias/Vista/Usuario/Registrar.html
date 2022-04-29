@@ -27,8 +27,10 @@
 
 
               </h3>
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
-              <a class="btn btn-primary btn-lg" href="/Usuario" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+                {% endif %}
+            <a class="btn btn-primary btn-lg" href="/Usuario" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
         </div>
 
 

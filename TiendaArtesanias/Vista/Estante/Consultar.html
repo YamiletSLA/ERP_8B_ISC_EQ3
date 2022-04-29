@@ -7,8 +7,9 @@
 <h3 class="text text-center"><p class="text-success">Estante</p></h3>
 <div class="text text-center">
 </div>
-
+        {%if current_user.is_authenticated and current_user.is_administrador()%}
         <a class="btn btn-primary btn-lg" href="/Estante/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+        {% endif %}
 
 <h4>
     <table class="table table-dark table-hover table-bordered">
@@ -16,7 +17,9 @@
             <th>Id Estante</th>
             <th>Nombre </th>
             <th>Ubicación</th>
+            {%if current_user.is_authenticated and current_user.is_administrador()%}
             <th>Editar</th>
+            {% endif %}
         </thead>
         {% for estant in estante%}
                 <tr>
@@ -24,7 +27,9 @@
                     <td>{{estant.nombre}}</td>
                     <td>{{estant.ubicacion}}</td>
 
+                    {%if current_user.is_authenticated and current_user.is_administrador()%}
                     <td><a href="/Estante/Ver/{{estant.idEstante}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                    {% endif %}
                 </tr>
              {% endfor %}
 
