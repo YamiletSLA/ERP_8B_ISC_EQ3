@@ -38,6 +38,24 @@ class Usuario(db.Model):
     tipoUsuario = Column(String, nullable=False)
     estatus = Column(String, nullable=False)
 
+    def is_vendedor(self):
+        if self.tipoUsuario=="Vendedor":
+            return True
+        else:
+            return False
+
+    def is_administrador(self):
+        if self.tipoUsuario=="Administrador":
+            return True
+        else:
+            return False
+
+    def is_almacenista(self):
+        if self.tipoUsuario=="Almacenista":
+            return True
+        else:
+            return False
+
     def is_authenticated(self):
         return True
 
