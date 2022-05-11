@@ -7,9 +7,9 @@
 <h3 class="text text-center"><p class="text-success">Reportes</p></h3>
 <div class="text text-center">
 </div>
-
+    {% if current_user.is_authenticated and current_user.is_admin() %}
         <a class="btn btn-primary btn-lg" href="/Reporte/nuevo" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
-
+    {% endif %}
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
@@ -20,10 +20,12 @@
             <th>Cantidad</th>
             <th>idAlmacen</th>
             <th>idProducto</th>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <th>Modificar</th>
+            {% endif %}
         </thead>
         {% for repor in reporte %}
-                <tr>
+                <tr class="active">
                     <td>{{repor.idReporteAlmacen}}</td>
                     <td>{{repor.fecha}}</td>
                     <td>{{repor.descripcion}}</td>
@@ -31,6 +33,7 @@
                     <td>{{repor.cantidad}}</td>
                     <td>{{repor.idAlmacen}}</td>
                     <td>{{repor.idProducto}}</td>
+
                     <td><a href="/Reporte/Ver/{{repor.idReporteAlmacen}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
                 </tr>
         {% endfor %}

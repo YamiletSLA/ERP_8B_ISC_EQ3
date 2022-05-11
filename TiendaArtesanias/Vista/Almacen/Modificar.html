@@ -5,34 +5,37 @@
 {% block principal %}
 <Script>
     function eliminar(Id,nombre){
-    resp=confirm("¿Estas seguro de eliminar el Estante "+  nombre  +" ?");
+    resp=confirm("¿Estas seguro de eliminar el Almacen "+  nombre  +" ?");
         if(resp==true){
-        location.href="/Estante/eliminar/"+Id
+        location.href="/Almacen/eliminar/"+Id
         }
         return;
     }
 </Script>
-<h3 class="text text-center"><p class="text-success">Modificar Estante</p></h3>
-    <form action="/Estante/Modificar" method="post" enctype="multipart/form-data">
+<h3 class="text text-center"><p class="text-success">Modificar Almacen</p></h3>
+    <form action="/Almacen/Modificar" method="post" enctype="multipart/form-data">
          <div class="text text-center">
               <h3>
-                    <label>Id Estante:</label>
-                        <input type="number" name="idEstante" readonly value="{{estant.idEstante}}" >
+                    <label>Id Almacen:</label>
+                        <input type="number" name="idAlmacen" readonly value="{{alma.idAlmacen}}" >
                    <br>
-                   <label>Nombre:</label>
-                        <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{estant.nombre}}" maxlength="3">
+                   <label>Cantidad de Producto:</label>
+                        <input type="text" required  name="cantProducto"  placeholder="Ingrese cantidad" value="{{alma.cantProducto}}" maxlength="3">
                    <br>
-                   <label>Ubicación:</label>
-                        <input type="text" required  name="ubicacion"  placeholder="Ingrese ubicacion del Estante" value="{{estant.ubicacion}}" maxlength="30">
+                   <label>Producto:</label>
+                        <input type="text" required  name="idProducto"  placeholder="Ingrese producto" value="{{alma.idProducto}}" maxlength="30">
+                   <br>
+                   <label>Estante:</label>
+                        <input type="text" required  name="idEstante"  placeholder="Ingrese estante" value="{{alma.idEstante}}" maxlength="30">
                    <br>
               </h3>
 
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
 
 
-                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{estant.idEstante}},'{{estant.nombre}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{alma.idAlmacen}},'{{alma.cantProducto}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
 
-             <a class="btn btn-primary btn-lg" href="/Estante" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+             <a class="btn btn-primary btn-lg" href="/Almacen" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
          </div>
     </form>
      {% if get_flashed_messages() %}

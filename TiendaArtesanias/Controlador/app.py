@@ -23,13 +23,20 @@ log_manager.login_message_category="info"
 def inicio():
     return render_template('loggin.html')
 
+@app.route('/Principal')
+def pagPrincipal():
+    if current_user.is_authenticated:
+        return render_template('comunes/Principal.html')
+    else:
+        return render_template('loggin.html')
+
 
 @app.route('/Usuarios/iniciarSesion')
 def mostrar_login():
     if current_user.is_authenticated:
         return render_template('comunes/Principal.html')
     else:
-        return render_template('usuarios/loggin.html')
+        return render_template('loggin.html')
 ####usuarios/loggin.html
 @log_manager.user_loader
 def cargar_usuario(id):
@@ -66,10 +73,9 @@ def ConsultaIndUsuario(id):
 @app.route("/validarSesion",methods=['POST'])
 def login():
     nombreUsuario=request.form['nomUsu']
-    password=request.form['password']
-    print ("user:"+nombreUsuario+" pwd:"+password)
+    password_hash=request.form['password']
     usuario=Usuario()
-    user=usuario.isValid(nombreUsuario,password)
+    user=usuario.isValid(nombreUsuario,password_hash)
     if user!=None:
         login_user(user)
         return render_template('comunes/Principal.html')
@@ -77,6 +83,11 @@ def login():
         flash('Nombre de usuario o contraseña incorrectos')
         return render_template('loggin.html')
 
+@app.route('/cerrarSesion')
+@login_required
+def cerrarSesion():
+    logout_user()
+    return redirect(url_for('mostrar_login'))
 
 @app.route('/Usuario/Modificar',methods=['post'])
 def ModificarUsuario():
@@ -284,40 +295,46 @@ def ConsultaDeAlmacen():
     almacen=alm.consultaGeneral()
     return render_template('Almacen/Consultar.html',almacen=almacen)
 
-@app.route('/Almacen/Registrar')
-def RegistrarNuevoAlmacen():
-    return render_template('Almacen/Registrar.html')
+@app.route('/Almacen/nuevo')
+@login_required
+def nuevoAlmacen():
+    if current_user.is_authenticated:
+            return render_template('Almacen/Registrar.html')
+    else:
+        abort(404)
 
-@app.route('/Almacen/nuevo',methods=['post'])
+@app.route('/Almacen/Agregar',methods=['post'])
+@login_required
 def RegistroNuevoAlmacen():
     alm= Almacen()
-    alm.nombre = request.form['nombre']
-    alm.ubicacion = request.form['ubicacion']
-
-    alm.insertar()
+    alm.cantProducto = request.form['cantProducto']
+    alm.idProducto = request.form['idProducto']
+    alm.idEstante = request.form['idEstante']
+    alm.agregar()
     flash('Almacen registrado con exito')
-    return render_template('Almacen/Registrar.html')
+    return render_template('Almacen/Registrar.html', alma=alm)
 
 @app.route('/Almacen/Ver/<int:id>')
 def ConsultaIndAlmacen(id):
     alm = Almacen()
-    return render_template('Almacen/Modificar.html',almacen=alm.consultaIndividual(id))
+    return render_template('Almacen/Modificar.html',alma=alm.consultaIndividual(id))
 
 @app.route('/Almacen/Modificar',methods=['post'])
 def ModificacionDeAlmacen():
     alm=Almacen()
     alm.idAlmacen = request.form['idAlmacen']
-    alm.nombre = request.form['nombre']
-    alm.ubicacion = request.form['ubicacion']
+    alm.cantProducto = request.form['cantProducto']
+    alm.idProducto = request.form['idProducto']
+    alm.idEstante = request.form['idEstante']
     alm.actualizar()
     flash('La modificación del estante se realizó con exito')
-    return render_template('Almacen/Modificar.html',almacen=alm)
+    return render_template('Almacen/Modificar.html',alma=alm)
 
 @app.route('/Almacen/eliminar/<int:id>')
 def eliminarAlmacen(id):
     alm=Almacen()
     alm.eliminar(id)
-    return render_template('Almacen/Consultar.html',almacen=alm)
+    return render_template('Almacen/Consultar.html',almacen=alm.consultaGeneral())
 
 
 ########################REPORTES############################
@@ -340,16 +357,16 @@ def nuevoReporte():
 @app.route('/Reporte/Agregar',methods=['post'])
 @login_required
 def agregarReporte():
-                    rp=ReporteAlmacen()
-                    rp.fecha=request.form['fecha']
-                    rp.descripcion=request.form['descripcion']
-                    rp.movimiento=request.form['movimiento']
-                    rp.cantidad=request.form['cantidad']
-                    rp.idAlmacen=request.form['idAlmacen']
-                    rp.idProducto=request.form['idProducto']
-                    rp.agregar()
-                    flash('¡ Rerporte agregado con exito !')
-                    return render_template('RepAlm/Reportes.html')
+      rp=ReporteAlmacen()
+      rp.fecha=request.form['fecha']
+      rp.descripcion=request.form['descripcion']
+      rp.movimiento=request.form['movimiento']
+      rp.cantidad=request.form['cantidad']
+      rp.idAlmacen=request.form['idAlmacen']
+      rp.idProducto=request.form['idProducto']
+      rp.agregar()
+      flash('¡ Rerporte agregado con exito !')
+      return render_template('RepAlm/Registrar.html',repor=rp)
 
 @app.route('/Reporte/Ver/<int:id>')
 def ConsultaIndReporte(id):
@@ -369,15 +386,14 @@ def editarReporte():
     rp.idProducto = request.form['idProducto']
     rp.editar()
     flash('La modificación del estante se realizó con exito')
-    return render_template('RepAlm/Reportes.html', repor=rp)
+    return render_template('RepAlm/Modificar.html', repor=rp)
 
 @app.route('/Reporte/eliminar/<int:id>')
 @login_required
 def eliminarReporte(id):
             rp=ReporteAlmacen()
             rp.eliminar(id)
-            flash('Producto eliminado con exito')
-            return render_template('RepAlm/Reportes.html', repor=rp)
+            return render_template('RepAlm/Reportes.html', reporte=rp.consultaGeneral())
 
 if __name__ == '__main__':
         db.init_app(app)

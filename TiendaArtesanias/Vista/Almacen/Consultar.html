@@ -8,20 +8,22 @@
 <div class="text text-center">
 </div>
 
-        <a class="btn btn-primary btn-lg" href="/Almacen/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+        <a class="btn btn-primary btn-lg" href="/Almacen/nuevo" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
 
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
+            <th>ID</th>
             <th>Cantidad </th>
             <th>Producto</th>
             <th>Estante</th>
         </thead>
         {% for alma in almacen%}
-                <tr>
-                    <td>{{alma.Cantidad}}</td>
-                    <td>{{alma.Producto}}</td>
-                    <td>{{alma.Estante}}</td>
+                <tr class="active">
+                    <td>{{alma.idAlmacen}}</td>
+                    <td>{{alma.cantProducto}}</td>
+                    <td>{{alma.idProducto}}</td>
+                    <td>{{alma.idEstante}}</td>
 
                     <td><a href="/Almacen/Ver/{{alma.idAlmacen}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
                 </tr>
