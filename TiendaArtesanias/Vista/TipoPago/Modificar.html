@@ -25,10 +25,13 @@
 
               </h3>
 
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
 
-
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{tipopa.idTipoPago}},'{{tipopa.tipo}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
 
              <a class="btn btn-primary btn-lg" href="/TipoPago" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
          </div>
