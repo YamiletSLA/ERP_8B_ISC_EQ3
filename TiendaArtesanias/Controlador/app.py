@@ -106,7 +106,7 @@ def ModificarUsuario():
 def eliminarUsuario(id):
     us=Usuario()
     us.eliminar(id)
-    return redirect(url_for("Usuarios"))
+    return render_template("/Usuario/Consultar.html", usuario=us.consultaGeneral())
 
 ############################################### TipoPago
 
@@ -146,7 +146,7 @@ def ModificarTipoPago():
 def eliminarTipoPago(id):
     ti=TipoPago()
     ti.eliminar(id)
-    return redirect(url_for("TiposPago"))
+    return render_template("/TipoPago/Consultaar.html",tipopago=ti.consultaGeneral())
 
 ############Transportes
 
@@ -190,7 +190,7 @@ def ModificarTransportes():
 def eliminarTransporte(id):
     t=Transportes()
     t.eliminar(id)
-    return render_template('Transportes/Consultar.html', trans=t)
+    return render_template('Transportes/Consultar.html', transportes=t.consultaGeneral())
 
 ##################
 
@@ -238,7 +238,7 @@ def ModificarProduct():
 def eliminarProductos(id):
     pr=Productos()
     pr.eliminar(id)
-    return render_template('Productos/Consultar.html',prod=pr)
+    return render_template('Productos/Consultar.html',productos=pr.consultaGeneral())
 
 
 ################ESTANTE
@@ -282,7 +282,7 @@ def ModificacionDeEstante():
 def eliminarEstantes(id):
     est=Estante()
     est.eliminar(id)
-    return render_template('Estante/Consultar.html',esta=est)
+    return render_template('Estante/Consultar.html',estante=est.consultaGeneral())
 
 
 
