@@ -5,7 +5,7 @@
       margin-bottom:0;
       padding:0;
       border-radius: 0;
-      background-color: #66280a
+      background-color: #8869a5
 
     }
 
@@ -17,7 +17,7 @@
     /* Remove the jumbotron's default bottom margin */
      .jumbotron {
       margin-bottom: 0;
-      background-color: #d0ab7a
+      background-color: #c58ade
 
     }
 
@@ -33,9 +33,38 @@ main{
 
 }
 
+body{
+    background-color:#FFFF;
+    background-image: url('../imagenes/FondoZar.png');
+    background-size: cover;
+    opacity: 0.8;
+}
+
 footer {
-      background-color: #c45824;
+      background-color: #9ac3df;
       padding: 25px;
       color: white;
     }
 
+.btn-default
+{
+background-color: #7C8683;
+color:#FFF;
+border-color: #7C8683;
+}
+
+.btn-default2
+{
+background-color: #8869A5;
+color:#FFF;
+border-color: #8869A5;
+text-align: center;
+font-size: 15pt;
+width: 200px;
+height: 45px;
+}
+
+.btn-default2:hover {
+   color: #FFF;
+   background-color: #755A8F;
+}

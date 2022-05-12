@@ -2,6 +2,12 @@
 {% block title %}
     Zarket
 {% endblock %}
+
+{% block styles %}
+    {{super()}}
+    <link href="{{url_for('static', filename='css/miEstilo.css')}}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="container">
     {% block contenido %}
