@@ -34,7 +34,7 @@ class Usuario(db.Model):
     idUsuario = Column(Integer, primary_key=True)
     nombreCompleto = Column(String, nullable=False)
     nombreUsuario = Column(String, nullable=False)
-    password_hash = Column(String, nullable=False)
+    contraseña = Column(String, nullable=False)
     tipoUsuario = Column(String, nullable=False)
     estatus = Column(String, nullable=False)
 
@@ -71,7 +71,7 @@ class Usuario(db.Model):
         return self.idUsuario
 
     def isValid(self,nomUsu,password):
-        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.password_hash==password).first()
+        usuario = Usuario.query.filter(Usuario.nombreUsuario == nomUsu,Usuario.contraseña==password).first()
         if usuario != None and usuario.is_active():
             return usuario
         else:
