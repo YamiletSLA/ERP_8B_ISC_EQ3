@@ -33,12 +33,7 @@ main{
 
 }
 
-body{
-    background-color:#FFFF;
-    background-image: url('../imagenes/FondoZar.png');
-    background-size: cover;
-    opacity: 0.8;
-}
+
 
 footer {
       background-color: #9ac3df;
