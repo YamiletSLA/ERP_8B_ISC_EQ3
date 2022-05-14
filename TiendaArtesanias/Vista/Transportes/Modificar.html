@@ -14,23 +14,32 @@
 </Script>
 <h3 class="text text-center"><p class="text-success">Modificar Transporte</p></h3>
     <form action="/Transportes/Modificar" method="post" enctype="multipart/form-data">
-         <div class="text text-center">
+         <div class="imput-group " style="padding-left: 290pt;">
               <h3>
-                    <label>Id Transporte:</label>
+                    <label class="col-sm-3">Id Transporte:</label>
                         <input type="number" name="idTransportes" readonly value="{{trans.idTransportes}}" >
                    <br>
-                   <label>Nombre:</label>
+                   <br>
+                   <label class="col-sm-3">Nombre:</label>
                         <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{trans.nombre}}" maxlength="20">
                    <br>
-                   <label>Telefono:</label>
+                   <br>
+                   <label class="col-sm-3">Telefono:</label>
                         <input type="text" required  name="telefono"  placeholder="Ingrese el Telefono" value="{{trans.telefono}}" maxlength="10">
                    <br>
-
-                   <label>Estatus</label>
-                        <input type="text" required  name="estatus"  placeholder="Ingrese estatus" value="{{trans.estatus}}" maxlength="1">
                    <br>
-
+                   <label class="col-sm-3">Estatus</label>
+                        <select class="form-select" name="estatus">
+                            <option selected>Estatus</option>
+                            <option value="{{trans.estatus}}" >A</option>
+                            <option value="{{trans.estatus}}" >I</option>
+                        </select>
+                        <label>A(Activo) I(Inactivo)</label>
+                    <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
 
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>

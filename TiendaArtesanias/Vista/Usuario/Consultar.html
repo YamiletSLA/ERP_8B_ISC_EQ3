@@ -18,7 +18,9 @@
             <th>Id Usuario</th>
             <th>Nombre Completo</th>
             <th>Nombre Usuario</th>
+            {%if current_user.is_authenticated and current_user.is_administrador()%}
             <th>Contraseña</th>
+            {% endif %}
             <th>Tipo Usuario</th>
             <th>Estatus</th>
 

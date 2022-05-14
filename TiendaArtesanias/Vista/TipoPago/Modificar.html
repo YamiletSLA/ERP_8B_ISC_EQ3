@@ -14,16 +14,18 @@
 </Script>
 <h3 class="text text-center"><p class="text-success">Modificar Tipo de Pago</p></h3>
     <form action="/TipoPago/Modificar" method="post" enctype="multipart/form-data">
-         <div class="text text-center">
+         <div class="imput-group " style="padding-left: 290pt;">
               <h3>
-                    <label>Id Tipo Pago:</label>
+                    <label class="col-sm-3">Id Tipo Pago:</label>
                         <input type="number" name="Id" readonly value="{{tipopa.idTipoPago}}" >
                    <br>
-                   <label>Tipo:</label>
-                        <input type="text" required  name="tipo"  placeholder="Ingrese Tipo de Usuario" value="{{tipopa.tipo}}" maxlength="10">
                    <br>
-
-              </h3>
+                   <label class="col-sm-3">Tipo:</label>
+                        <input type="text" required  name="tipo"  placeholder="Ingrese Tipo de Usuario" value="{{tipopa.tipo}}" maxlength="10">
+                    </h3>
+             <br>
+         </div>
+        <div class="text text-center">
 
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
