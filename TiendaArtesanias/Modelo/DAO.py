@@ -119,8 +119,9 @@ class Transportes(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self):
-        return self.query.all()
+    def consultaGeneral(self, pagina):
+        return self.query.order_by(Transportes.idTransportes.asc()).paginate(pagina, per_page=5, error_out=False).items
+        # return self.query.all()
 
 class Productos(db.Model):
     __tablename__ = 'productos'

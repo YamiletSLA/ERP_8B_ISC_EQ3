@@ -159,10 +159,10 @@ def eliminarTipoPago(id):
 
 ############Transportes
 
-@app.route('/Transportes')
-def consultaGeneralTransportes():
+@app.route('/Transportes/<int:pagina>')
+def consultaGeneralTransportes(pagina):
     t=Transportes()
-    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral())
+    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Transportes/Registrar')
 def RegistrarTransporte():
