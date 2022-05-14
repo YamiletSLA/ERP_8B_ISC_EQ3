@@ -6,27 +6,44 @@
 
      <h3 class="text text-center"><p class="text-success">Registrar Usuario</p> </h3>
     <form action="/Usuario/nuevo" method="post" enctype="multipart/form-data">
-        <div class="text text-center">
+        <div class="imput-group " style="padding-left: 260pt;">
               <h3>
 
-                 <label>Nombre Completo:</label>
+                 <label class="col-sm-4">Nombre Completo:</label>
                   <input type="text" required  name="nombreCompleto" placeholder="Ingrese Nombre Completo" maxlength="40">
                 <br>
-                  <label>Nombre Usuario:</label>
+                <br>
+                  <label class="col-sm-4">Nombre Usuario:</label>
                   <input type="text" required  name="nombreUsuario" placeholder="Ingrese Nombre Usuario" maxlength="10">
                 <br>
-                  <label>Contraseña:</label>
+                <br>
+                  <label class="col-sm-4">Contraseña:</label>
                   <input type="text" required  name="contraseña" placeholder="Ingrese Contraseña" maxlength="10">
                 <br>
-                  <label>Tipo Usuario:</label>
-                  <input type="text" name="tipoUsuario" required placeholder="Tipo Usuario" maxlength="15" >
                 <br>
-                  <label>Estatus:</label>
-                  <input type="text" required  name="estatus" placeholder="Ingrese el Estatus" maxlength="1">
-                <br>
-
-
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                        <label class="col-sm-4">Tipo Usuario:</label>
+                        <select class="form-select" name="tipoUsuario" required>
+                            <option selected>Tipo Usuario</option>
+                            <option>Administrador</option>
+                            <option>Vendedor</option>
+                            <option>Almacenista</option>
+                        </select>
+                   <br>
+                   <br>
+                        <label class="col-sm-4">Estatus</label>
+                        <select class="form-select" name="estatus" required>
+                            <option selected>Estatus</option>
+                            <option>A</option>
+                            <option>I</option>
+                        </select>
+                        <label>A(Activo) I(Inactivo)</label>
+                    {% endif %}
+                 <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
                 {% endif %}

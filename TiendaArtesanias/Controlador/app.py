@@ -112,6 +112,11 @@ def eliminarUsuario(id):
     us.eliminar(id)
     return render_template("/Usuario/Consultar.html", usuario=us.consultaGeneral())
 
+@app.route('/Usuarios/verPerfil')
+@login_required
+def consultarUsuario():
+    return render_template('Usuario/Modificar.html')
+
 ############################################### TipoPago
 
 @app.route('/TipoPago')

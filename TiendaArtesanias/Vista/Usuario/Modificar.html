@@ -14,30 +14,47 @@
 </Script>
 <h3 class="text text-center"><p class="text-success">Modificar Usuario</p></h3>
     <form action="/Usuario/Modificar" method="post" enctype="multipart/form-data">
-         <div class="text text-center">
+         <div class="imput-group " style="padding-left: 260pt;">
               <h3>
-                    <label>Id Usuario:</label>
+                        <label  class="col-sm-4">ID:</label>
                         <input type="number" name="idUsuario" readonly value="{{user.idUsuario}}" >
                    <br>
-                   <label>Nombre Completo:</label>
+                   <br>
+                        <label class="col-sm-4">Nombre Completo:</label>
                         <input type="text" required  name="nombreCompleto"  placeholder="Ingrese nombre completo" value="{{user.nombreCompleto}}" maxlength="40">
                    <br>
-                   <label>Nombre Usuario:</label>
+                   <br>
+                        <label class="col-sm-4">Nombre Usuario:</label>
                         <input type="text" required  name="nombreUsuario"  placeholder="Ingrese nombre de usuario" value="{{user.nombreUsuario}}" maxlength="10">
                    <br>
-                   <label>Contraseña</label>
+                   <br>
+                        <label class="col-sm-4">Contraseña</label>
                         <input type="text" required  name="contraseña"  placeholder="Ingrese contraseña" value="{{user.contraseña}}" maxlength="10">
                    <br>
-                  <label>Tipo Usuario:</label>
-                        <input type="text" name="tipoUsuario" placeholder="Ingrese Tipo de Usuario"  value="{{user.tipoUsuario}}" maxlength="15" >
                    <br>
-                  <br>
-                   <label>Estatus</label>
-                        <input type="text" required  name="estatus"  placeholder="Ingrese estatus" value="{{user.estatus}}" maxlength="1">
+                    {%if current_user.is_authenticated and current_user.is_administrador()%}
+                        <label class="col-sm-4">Tipo Usuario:</label>
+                        <select class="form-select" name="tipoUsuario">
+                            <option selected>Tipo Usuario</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Vendedor" >Vendedor</option>
+                            <option value="Almacenista" >Almacenista</option>
+                        </select>
                    <br>
-
+                   <br>
+                        <label class="col-sm-4">Estatus</label>
+                        <select class="form-select" name="estatus">
+                            <option selected>Estatus</option>
+                            <option value="{{user.estatus}}" >A</option>
+                            <option value="{{user.estatus}}" >I</option>
+                        </select>
+                        <label>A(Activo) I(Inactivo)</label>
+                    {% endif %}
+                   <br>
               </h3>
-
+             <br>
+         </div>
+        <div class="text text-center">
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
                 {% endif %}

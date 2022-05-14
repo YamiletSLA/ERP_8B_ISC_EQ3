@@ -96,24 +96,6 @@ class Usuario(db.Model):
     def consultaGeneral(self):
         return self.query.all()
 
-    def is_admin(self):
-        if self.tipoUsuario== 'Administrador':
-            return True
-        else:
-            return False
-
-    def is_vendedor(self):
-        if self.tipoUsuario== 'Vendedor':
-            return True
-        else:
-            return False
-
-    def is_almacenista(self):
-        if self.tipoUsuario== 'Almacenista':
-            return True
-        else:
-            return False
-
 class Transportes(db.Model):
     __tablename__ = 'Transportes'
     idTransportes = Column(Integer, primary_key=True)
