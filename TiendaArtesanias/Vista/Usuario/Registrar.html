@@ -31,13 +31,13 @@
                         </select>
                    <br>
                    <br>
-                        <label class="col-sm-4">Estatus</label>
-                        <select class="form-select" name="estatus" required>
-                            <option selected>Estatus</option>
-                            <option>A</option>
-                            <option>I</option>
-                        </select>
-                        <label>A(Activo) I(Inactivo)</label>
+                        <label class="col-sm-4"> Estatus:</label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="A" checked>Activo
+                        </label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="I">Inactivo
+                        </label>
                     {% endif %}
                  <br>
               </h3>
@@ -47,7 +47,7 @@
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
                 {% endif %}
-            <a class="btn btn-primary btn-lg" href="/Usuario" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+            <a class="btn btn-primary btn-lg" href="/Usuario/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
         </div>
 
 

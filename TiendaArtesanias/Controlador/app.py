@@ -10,6 +10,7 @@ app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@127.0.0.1:3306/sucumaster'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
 
 #app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
 
@@ -46,11 +47,10 @@ def mostrar_login():
 def cargar_usuario(id):
     return Usuario.query.get(int(id))
 
-@app.route('/Usuario')
-def Usuarios():
+@app.route('/Usuario/<int:pagina>')
+def Usuarios(pagina):
     us=Usuario()
-    usuario=us.consultaGeneral()
-    return render_template('Usuario/Consultar.html',usuario=usuario)
+    return render_template('Usuario/Consultar.html',usuario=us.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Usuario/Registrar')
 def RegistrarUsuario():
@@ -159,10 +159,10 @@ def eliminarTipoPago(id):
 
 ############Transportes
 
-@app.route('/Transportes')
-def consultaGeneralTransportes():
+@app.route('/Transportes/<int:pagina>')
+def consultaGeneralTransportes(pagina):
     t=Transportes()
-    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral())
+    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Transportes/Registrar')
 def RegistrarTransporte():
@@ -186,7 +186,7 @@ def ConsultaIndTransportes(id):
 @app.route('/Transportes/Modificar',methods=['post'])
 def ModificarTransportes():
     t= Transportes()
-    t.idTipoPago = request.form['Id']
+    t.idTransportes = request.form['idTransportes']
     t.nombre = request.form['nombre']
     t.telefono=request.form['telefono']
     t.estatus=request.form['estatus']
@@ -202,12 +202,10 @@ def eliminarTransporte(id):
     return render_template('Transportes/Consultar.html', transportes=t.consultaGeneral())
 
 ##################
-
-@app.route('/Productos')
-def ConsultaGeneralProductos():
+@app.route('/Productos/<int:pagina>')
+def ConsultaGeneralProductos(pagina):
     pr=Productos()
-    productos=pr.consultaGeneral()
-    return render_template('Productos/Consultar.html',productos=productos)
+    return render_template('Productos/Consultar.html',productos=pr.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Productos/Registrar')
 def RegistrarNuevoProductos():
@@ -251,12 +249,10 @@ def eliminarProductos(id):
 
 
 ################ESTANTE
-
-@app.route('/Estante')
-def ConsultaDeEstante():
+@app.route('/Estante/<int:pagina>')
+def ConsultaDeEstante(pagina):
     est=Estante()
-    estante=est.consultaGeneral()
-    return render_template('Estante/Consultar.html',estante=estante)
+    return render_template('Estante/Consultar.html',estante=est.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Estante/Registrar')
 def RegistrarNuevoEstante():

@@ -42,13 +42,14 @@
                         </select>
                    <br>
                    <br>
-                        <label class="col-sm-4">Estatus</label>
-                        <select class="form-select" name="estatus">
-                            <option selected>Estatus</option>
-                            <option value="{{user.estatus}}" >A</option>
-                            <option value="{{user.estatus}}" >I</option>
-                        </select>
-                        <label>A(Activo) I(Inactivo)</label>
+                         <label class="col-sm-4">Estatus:</label>
+                         {% if current_user.estatus=='A' %}
+                      <input type="radio" name="estatus" checked value="A">Activo
+                      <input type="radio" name="estatus" value="I">Inactivo
+                         {% else %}
+                         <input type="radio" name="estatus" value="A">Activo
+                          <input type="radio" name="estatus" checked value="I">Inactivo
+                         {% endif %}
                     {% endif %}
                    <br>
               </h3>
@@ -64,7 +65,7 @@
                 <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{user.idUsuario}},'{{user.nombreCompleto}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
                 {% endif %}
 
-             <a class="btn btn-primary btn-lg" href="/Usuario" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+             <a class="btn btn-primary btn-lg" href="/Usuario/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
          </div>
     </form>
      {% if get_flashed_messages() %}
