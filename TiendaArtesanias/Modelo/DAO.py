@@ -147,8 +147,9 @@ class Productos(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self):
-        return self.query.all()
+    def consultaGeneral(self, pagina):
+        return self.query.order_by(Productos.idProducto.asc()).paginate(pagina, per_page=5, error_out=False).items
+        # return self.query.all()
 
 class Estante(db.Model):
     __tablename__ = 'Estante'
@@ -172,8 +173,9 @@ class Estante(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self):
-        return self.query.all()
+    def consultaGeneral(self, pagina):
+        return self.query.order_by(Estante.idEstante.asc()).paginate(pagina, per_page=5, error_out=False).items
+        # return self.query.all()
 
 #########REPORTES#######
 class Almacen(db.Model):

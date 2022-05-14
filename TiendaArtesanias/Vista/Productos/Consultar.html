@@ -40,6 +40,17 @@
              {% endfor %}
 
     </table>
+    </table>
+    <div>
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            {% if pagina <=1 %}
+            <li class="disabled"  ><a class="page-link" href="#">&larr;Anterior</a></li>
+            {% else %}
+            <li>  <a class="page-link" href="/Productos/{{pagina-1}}">&larr;Anterior</a></li>
+            {% endif %}
+            <li>  <a class="page-link" href="/Productos/{{pagina+1}}">Siguiente &rarr;</a></li>
+        </ul>
+    </div>
 </h4>
 <a class="btn btn-primary btn-lg" href="/Principal" role="button">Regresar</a>
 {% endblock %}

@@ -202,12 +202,10 @@ def eliminarTransporte(id):
     return render_template('Transportes/Consultar.html', transportes=t.consultaGeneral())
 
 ##################
-
-@app.route('/Productos')
-def ConsultaGeneralProductos():
+@app.route('/Productos/<int:pagina>')
+def ConsultaGeneralProductos(pagina):
     pr=Productos()
-    productos=pr.consultaGeneral()
-    return render_template('Productos/Consultar.html',productos=productos)
+    return render_template('Productos/Consultar.html',productos=pr.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Productos/Registrar')
 def RegistrarNuevoProductos():
@@ -251,12 +249,10 @@ def eliminarProductos(id):
 
 
 ################ESTANTE
-
-@app.route('/Estante')
-def ConsultaDeEstante():
+@app.route('/Estante/<int:pagina>')
+def ConsultaDeEstante(pagina):
     est=Estante()
-    estante=est.consultaGeneral()
-    return render_template('Estante/Consultar.html',estante=estante)
+    return render_template('Estante/Consultar.html',estante=est.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Estante/Registrar')
 def RegistrarNuevoEstante():

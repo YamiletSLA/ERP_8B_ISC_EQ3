@@ -35,7 +35,7 @@
                 <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{estant.idEstante}},'{{estant.nombre}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
                 {% endif %}
 
-             <a class="btn btn-primary btn-lg" href="/Estante" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+             <a class="btn btn-primary btn-lg" href="/Estante/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
          </div>
     </form>
      {% if get_flashed_messages() %}
