@@ -42,13 +42,14 @@
                         </select>
                    <br>
                    <br>
-                        <label class="col-sm-4">Estatus</label>
-                        <select class="form-select" name="estatus">
-                            <option selected>Estatus</option>
-                            <option value="{{user.estatus}}" >A</option>
-                            <option value="{{user.estatus}}" >I</option>
-                        </select>
-                        <label>A(Activo) I(Inactivo)</label>
+                         <label class="col-sm-4">Estatus:</label>
+                         {% if current_user.estatus=='A' %}
+                      <input type="radio" name="estatus" checked value="A">Activo
+                      <input type="radio" name="estatus" value="I">Inactivo
+                         {% else %}
+                         <input type="radio" name="estatus" value="A">Activo
+                          <input type="radio" name="estatus" checked value="I">Inactivo
+                         {% endif %}
                     {% endif %}
                    <br>
               </h3>

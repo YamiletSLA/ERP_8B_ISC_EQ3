@@ -10,6 +10,7 @@ app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@127.0.0.1:3306/sucumaster'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
 
 #app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
 
@@ -185,7 +186,7 @@ def ConsultaIndTransportes(id):
 @app.route('/Transportes/Modificar',methods=['post'])
 def ModificarTransportes():
     t= Transportes()
-    t.idTipoPago = request.form['Id']
+    t.idTransportes = request.form['idTransportes']
     t.nombre = request.form['nombre']
     t.telefono=request.form['telefono']
     t.estatus=request.form['estatus']
