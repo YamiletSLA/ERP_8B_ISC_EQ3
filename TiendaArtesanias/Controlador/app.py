@@ -46,11 +46,10 @@ def mostrar_login():
 def cargar_usuario(id):
     return Usuario.query.get(int(id))
 
-@app.route('/Usuario')
-def Usuarios():
+@app.route('/Usuario/<int:pagina>')
+def Usuarios(pagina):
     us=Usuario()
-    usuario=us.consultaGeneral()
-    return render_template('Usuario/Consultar.html',usuario=usuario)
+    return render_template('Usuario/Consultar.html',usuario=us.consultaGeneral(pagina),pagina=pagina)
 
 @app.route('/Usuario/Registrar')
 def RegistrarUsuario():
