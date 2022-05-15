@@ -7,7 +7,7 @@
 <h3 class="text text-center"><p class="text-success">Reportes</p></h3>
 <div class="text text-center">
 </div>
-    {% if current_user.is_authenticated and current_user.is_admin() %}
+    {% if current_user.is_authenticated and current_user.is_administrador() %}
         <a class="btn btn-primary btn-lg" href="/Reporte/nuevo" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
     {% endif %}
 <h4>
@@ -20,7 +20,7 @@
             <th>Cantidad</th>
             <th>idAlmacen</th>
             <th>idProducto</th>
-            {% if current_user.is_authenticated and current_user.is_admin() %}
+            {% if current_user.is_authenticated and current_user.is_administrador() %}
             <th>Modificar</th>
             {% endif %}
         </thead>
@@ -40,5 +40,5 @@
 
     </table>
 </h4>
-<a class="btn btn-primary btn-lg" href="/Principal" role="button">Regresar</a>
+<a class="btn btn-primary btn-lg" href="/Principal" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
 {% endblock %}

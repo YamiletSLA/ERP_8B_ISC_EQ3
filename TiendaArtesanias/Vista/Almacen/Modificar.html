@@ -14,22 +14,39 @@
 </Script>
 <h3 class="text text-center"><p class="text-success">Modificar Almacen</p></h3>
     <form action="/Almacen/Modificar" method="post" enctype="multipart/form-data">
-         <div class="text text-center">
+         <div class="imput-group " style="padding-left: 260pt;">
               <h3>
-                    <label>Id Almacen:</label>
+                    <label class="col-sm-4">Id Almacen:</label>
                         <input type="number" name="idAlmacen" readonly value="{{alma.idAlmacen}}" >
                    <br>
-                   <label>Cantidad de Producto:</label>
+                   <br>
+                   <label class="col-sm-4">Cantidad de Producto:</label>
                         <input type="text" required  name="cantProducto"  placeholder="Ingrese cantidad" value="{{alma.cantProducto}}" maxlength="3">
                    <br>
-                   <label>Producto:</label>
-                        <input type="text" required  name="idProducto"  placeholder="Ingrese producto" value="{{alma.idProducto}}" maxlength="30">
                    <br>
-                   <label>Estante:</label>
-                        <input type="text" required  name="idEstante"  placeholder="Ingrese estante" value="{{alma.idEstante}}" maxlength="30">
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                        <label class="col-sm-4">Categoria:</label>
+                        <select class="form-select" name="categoria" >
+                            <option value="" selected disabled hidden>{{alma.Categoria}}</option>
+                            <option value="{{alma.Categoria}}">Macetas</option>
+                            <option value="{{alma.Categoria}}" >Suculentas</option>
+                            <option value="{{alma.Categoria}}" >Velas</option>
+                        </select>
+                  {% endif %}
+                   <br>
+                   <br>
+                  <label class="col-sm-4">Estante:</label>
+                        <select class="form-select" name="estante" >
+                            <option value="" selected disabled hidden>{{alma.Estante}}</option>
+                            <option value="{{alma.Estante}}">A</option>
+                            <option value="{{alma.Estante}}" >B</option>
+                            <option value="{{alma.Estante}}" >C</option>
+                        </select>
                    <br>
               </h3>
-
+             <br>
+         </div>
+        <div class="text text-center">
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
 
 

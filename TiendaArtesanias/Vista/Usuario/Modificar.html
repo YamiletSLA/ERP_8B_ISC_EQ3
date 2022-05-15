@@ -42,14 +42,14 @@
                         </select>
                    <br>
                    <br>
-                         <label class="col-sm-4">Estatus:</label>
-                         {% if current_user.estatus=='A' %}
-                      <input type="radio" name="estatus" checked value="A">Activo
-                      <input type="radio" name="estatus" value="I">Inactivo
-                         {% else %}
-                         <input type="radio" name="estatus" value="A">Activo
-                          <input type="radio" name="estatus" checked value="I">Inactivo
-                         {% endif %}
+
+                         <label class="col-sm-4"> Estatus:</label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="A" checked>Activo
+                        </label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="I">Inactivo
+                        </label>
                     {% endif %}
                    <br>
               </h3>

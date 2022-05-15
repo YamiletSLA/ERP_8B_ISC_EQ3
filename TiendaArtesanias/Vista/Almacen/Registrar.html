@@ -5,24 +5,38 @@
 {% block principal %}
      <h3 class="text text-center"><p class="text-success">Agregar Almacen</p> </h3>
     <form action="/Almacen/Agregar" method="post" enctype="multipart/form-data">
-        <div class="text text-center">
+        <div class="imput-group " style="padding-left: 320pt;">
               <h3>
 
-                 <label>Cantidad:</label>
+                 <label class="col-sm-2">Cantidad:</label>
                   <input type="text" required  name="cantProducto" placeholder="Ingresar cantidad" maxlength="3">
                 <br>
-                  <label>Producto:</label>
-                  <input type="text" required  name="idProducto" placeholder="Ingrese producto" maxlength="3">
                 <br>
-                  <label>Estante:</label>
-                  <input type="text" required  name="idEstante" placeholder="Ingrese número de estante" maxlength="3">
+                  <label class="col-sm-2">Categoria:</label>
+                        <select class="form-select" name="categoria" required>
+                            <option selected disabled hidden>Categoria</option>
+                            <option>Macetas</option>
+                            <option>Suculentas</option>
+                            <option>Velas</option>
+                        </select>
                 <br>
                 <br>
-
+                  <label class="col-sm-2">Estante:</label>
+                        <select class="form-select" name="estante" >
+                            <option selected disabled hidden>Estante</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                        </select>
+                <br>
+                <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><span class="glyphicon glyphicon-floppy-disk"></span>
                 Agregar</button>
-              <a class="btn btn-primary btn-lg" href="/Almacen" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+              <a class="btn btn-primary btn-lg" href="/Almacen" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
         </div>
 
 

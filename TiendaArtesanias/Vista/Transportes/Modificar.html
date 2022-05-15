@@ -19,6 +19,7 @@
                     <label class="col-sm-3">Id Transporte:</label>
                         <input type="number" name="idTransportes" readonly value="{{trans.idTransportes}}" >
                    <br>
+
                    <br>
                    <label class="col-sm-3">Nombre:</label>
                         <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{trans.nombre}}" maxlength="20">
@@ -28,14 +29,17 @@
                         <input type="text" required  name="telefono"  placeholder="Ingrese el Telefono" value="{{trans.telefono}}" maxlength="10">
                    <br>
                    <br>
-                   <label class="col-sm-3">Estatus</label>
-                        <select class="form-select" name="estatus">
-                            <option selected>Estatus</option>
-                            <option value="{{trans.estatus}}" >A</option>
-                            <option value="{{trans.estatus}}" >I</option>
-                        </select>
-                        <label>A(Activo) I(Inactivo)</label>
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                   <label class="col-sm-3"> Estatus:</label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="A" checked>Activo
+                        </label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="I">Inactivo
+                        </label>
+                  {% endif %}
                     <br>
+                   <br>
               </h3>
              <br>
          </div>

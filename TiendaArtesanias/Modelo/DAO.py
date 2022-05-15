@@ -93,9 +93,12 @@ class Usuario(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self, pagina):
-        return self.query.order_by(Usuario.idUsuario.asc()).paginate(pagina, per_page=5, error_out=False).items
-        # return self.query.all()
+    def consultaGeneral(self):
+        return self.query.all()
+
+    # def consultaGeneral(self):
+    #     return self.query.order_by(Usuario.idUsuario.asc()).paginate(pagina, per_page=5, error_out=False).items
+    #     # return self.query.all()
 
 
 class Transportes(db.Model):
@@ -121,9 +124,11 @@ class Transportes(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self, pagina):
-        return self.query.order_by(Transportes.idTransportes.asc()).paginate(pagina, per_page=5, error_out=False).items
-        # return self.query.all()
+    def consultaGeneral(self):
+        return self.query.all()
+    # def consultaGeneral(self, pagina):
+    #     return self.query.order_by(Transportes.idTransportes.asc()).paginate(pagina, per_page=5, error_out=False).items
+    #     # return self.query.all()
 
 class Productos(db.Model):
     __tablename__ = 'productos'
@@ -149,9 +154,11 @@ class Productos(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self, pagina):
-        return self.query.order_by(Productos.idProducto.asc()).paginate(pagina, per_page=5, error_out=False).items
-        # return self.query.all()
+    def consultaGeneral(self):
+        return self.query.all()
+    # def consultaGeneral(self, pagina):
+    #     return self.query.order_by(Productos.idProducto.asc()).paginate(pagina, per_page=5, error_out=False).items
+    #     # return self.query.all()
 
 class Estante(db.Model):
     __tablename__ = 'Estante'
@@ -175,17 +182,19 @@ class Estante(db.Model):
         db.session.merge(self)
         db.session.commit()
 
-    def consultaGeneral(self, pagina):
-        return self.query.order_by(Estante.idEstante.asc()).paginate(pagina, per_page=5, error_out=False).items
-        # return self.query.all()
+    def consultaGeneral(self):
+        return self.query.all()
+    # def consultaGeneral(self, pagina):
+    #     return self.query.order_by(Estante.idEstante.asc()).paginate(pagina, per_page=5, error_out=False).items
+    #     # return self.query.all()
 
 #########REPORTES#######
 class Almacen(db.Model):
     __tablename__='almacen'
     idAlmacen = Column(Integer, primary_key=True)
     cantProducto = Column(Integer,nullable=False)
-    idProducto = Column(Integer, ForeignKey('productos.idProducto'))
-    idEstante = Column(Integer, ForeignKey('Estante.idEstante'))
+    Categoria = Column(String, nullable=False)
+    Estante = Column(String, nullable=False)
 
     def agregar(self):
         db.session.add(self)

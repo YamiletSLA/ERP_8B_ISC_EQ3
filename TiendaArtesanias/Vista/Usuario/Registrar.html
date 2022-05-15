@@ -31,13 +31,13 @@
                         </select>
                    <br>
                    <br>
-                        <label class="col-sm-4"> Estatus:</label>
-                        <label class="radio-inline">
-                        <input type="radio" name="estatus" value="A" checked>Activo
-                        </label>
-                        <label class="radio-inline">
-                        <input type="radio" name="estatus" value="I">Inactivo
-                        </label>
+                        <label class="col-sm-4">Estatus</label>
+                        <select class="form-select" name="estatus" required>
+                            <option selected>Estatus</option>
+                            <option>A</option>
+                            <option>I</option>
+                        </select>
+                        <label>A(Activo) I(Inactivo)</label>
                     {% endif %}
                  <br>
               </h3>

@@ -10,7 +10,6 @@ app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@127.0.0.1:3306/sucumaster'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
 
 #app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
 
@@ -47,10 +46,10 @@ def mostrar_login():
 def cargar_usuario(id):
     return Usuario.query.get(int(id))
 
-@app.route('/Usuario/<int:pagina>')
-def Usuarios(pagina):
+@app.route('/Usuario')
+def Usuarios():
     us=Usuario()
-    return render_template('Usuario/Consultar.html',usuario=us.consultaGeneral(pagina),pagina=pagina)
+    return render_template('Usuario/Consultar.html',usuario=us.consultaGeneral())
 
 @app.route('/Usuario/Registrar')
 def RegistrarUsuario():
@@ -159,10 +158,10 @@ def eliminarTipoPago(id):
 
 ############Transportes
 
-@app.route('/Transportes/<int:pagina>')
-def consultaGeneralTransportes(pagina):
+@app.route('/Transportes')
+def consultaGeneralTransportes():
     t=Transportes()
-    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral(pagina),pagina=pagina)
+    return render_template('Transportes/Consultar.html',transportes=t.consultaGeneral())
 
 @app.route('/Transportes/Registrar')
 def RegistrarTransporte():
@@ -186,7 +185,7 @@ def ConsultaIndTransportes(id):
 @app.route('/Transportes/Modificar',methods=['post'])
 def ModificarTransportes():
     t= Transportes()
-    t.idTransportes = request.form['idTransportes']
+    t.idTipoPago = request.form['Id']
     t.nombre = request.form['nombre']
     t.telefono=request.form['telefono']
     t.estatus=request.form['estatus']
@@ -202,10 +201,10 @@ def eliminarTransporte(id):
     return render_template('Transportes/Consultar.html', transportes=t.consultaGeneral())
 
 ##################
-@app.route('/Productos/<int:pagina>')
-def ConsultaGeneralProductos(pagina):
+@app.route('/Productos/')
+def ConsultaGeneralProductos():
     pr=Productos()
-    return render_template('Productos/Consultar.html',productos=pr.consultaGeneral(pagina),pagina=pagina)
+    return render_template('Productos/Consultar.html',productos=pr.consultaGeneral())
 
 @app.route('/Productos/Registrar')
 def RegistrarNuevoProductos():
@@ -249,10 +248,10 @@ def eliminarProductos(id):
 
 
 ################ESTANTE
-@app.route('/Estante/<int:pagina>')
-def ConsultaDeEstante(pagina):
+@app.route('/Estante')
+def ConsultaDeEstante():
     est=Estante()
-    return render_template('Estante/Consultar.html',estante=est.consultaGeneral(pagina),pagina=pagina)
+    return render_template('Estante/Consultar.html',estante=est.consultaGeneral())
 
 @app.route('/Estante/Registrar')
 def RegistrarNuevoEstante():
@@ -313,8 +312,8 @@ def nuevoAlmacen():
 def RegistroNuevoAlmacen():
     alm= Almacen()
     alm.cantProducto = request.form['cantProducto']
-    alm.idProducto = request.form['idProducto']
-    alm.idEstante = request.form['idEstante']
+    alm.Categoria = request.form['categoria']
+    alm.Estante = request.form['estante']
     alm.agregar()
     flash('Almacen registrado con exito')
     return render_template('Almacen/Registrar.html', alma=alm)
@@ -329,8 +328,8 @@ def ModificacionDeAlmacen():
     alm=Almacen()
     alm.idAlmacen = request.form['idAlmacen']
     alm.cantProducto = request.form['cantProducto']
-    alm.idProducto = request.form['idProducto']
-    alm.idEstante = request.form['idEstante']
+    alm.Categoria = request.form['categoria']
+    alm.Estante = request.form['estante']
     alm.actualizar()
     flash('La modificación del estante se realizó con exito')
     return render_template('Almacen/Modificar.html',alma=alm)
