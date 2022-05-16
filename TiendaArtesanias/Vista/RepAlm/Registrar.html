@@ -5,30 +5,58 @@
 {% block principal %}
      <h3 class="text text-center"><p class="text-success">Agregar Reporte de Almacen</p> </h3>
     <form action="/Reporte/Agregar" method="post" enctype="multipart/form-data">
-        <div class="text text-center">
+        <div class="imput-group " style="padding-left: 320pt;">
               <h3>
 
-                 <label>Fecha:</label>
+                 <label class="col-sm-3">Fecha:</label>
                   <input type="date" required  name="fecha" placeholder="Ingresar fecha" maxlength="20">
                 <br>
-                  <label>Descripción:</label>
+                <br>
+                  <label class="col-sm-3">Descripción:</label>
                   <input type="text" required  name="descripcion" placeholder="Ingrese descripción" maxlength="50">
                 <br>
-                  <label>Movimiento:</label>
+                <br>
+                  <label class="col-sm-3">Movimiento:</label>
                   <input type="text" required  name="movimiento" placeholder="Movimiento" maxlength="45">
                 <br>
-                  <label>Cantidad:</label>
+                <br>
+                  <label class="col-sm-3">Cantidad:</label>
                   <input type="text" name="cantidad" required placeholder="Ingresar cantidad" maxlength="3" >
                 <br>
-                  <label>Almacen:</label>
-                  <input type="number" required  name="idAlmacen" placeholder="Almacen" maxlength="1">
+                <br>
+                  <label class="col-sm-3">Almacen:</label>
+                  <input type="number" required  name="idAlmacen" placeholder="Almacen" maxlength="1" min="1">
                 <br>
                 <br>
-                  <label>Producto:</label>
-                  <input type="number" required  name="idProducto" placeholder="Producto" maxlength="1">
-                <br>
-
+                  <label class="col-sm-3">Producto:</label>
+                        <select class="form-select" name="producto">
+                            <option value="" selected disabled hidden>Seleccionar Producto</option>
+                            <optgroup label="Macetas">
+                                <option value="Octagonal">Octagonal</option>
+                                <option value="Hexagonal">Hexagonal</option>
+                                <option value="Cuadrada">Cuadrada</option>
+                                <option value="Redonda">Redonda</option>
+                            </optgroup>
+                            <optgroup label="Suculentas" >
+                                <option value="Echeveria">Echeveria</option>
+                                <option value="Escarcha">Escarcha</option>
+                                <option value="Jade">Jade</option>
+                                <option value="Perforata">Perforata</option>
+                                <option value="Sedum">Sedum</option>
+                                <option value="Siempreviva">Siempreviva</option>
+                                <option value="OrejasShrek">OrejasShrek</option>
+                                <option value="GarritaOso}">GarritaOso</option>
+                            </optgroup>
+                            <optgroup label="Velas">
+                                <option value="Vela c">Vela c</option>
+                                <option value="Vela g">Vela g</option>
+                            </optgroup>
+                        </select>
+                  <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><span class="glyphicon glyphicon-floppy-disk"></span>
                 Agregar</button>
               <a class="btn btn-primary btn-lg" href="/Reporte" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
