@@ -19,7 +19,7 @@
             <th>Movimiento</th>
             <th>Cantidad</th>
             <th>idAlmacen</th>
-            <th>idProducto</th>
+            <th>Producto</th>
             {% if current_user.is_authenticated and current_user.is_administrador() %}
             <th>Modificar</th>
             {% endif %}
@@ -32,13 +32,14 @@
                     <td>{{repor.movimiento}}</td>
                     <td>{{repor.cantidad}}</td>
                     <td>{{repor.idAlmacen}}</td>
-                    <td>{{repor.idProducto}}</td>
-
+                    <td>{{repor.Producto}}</td>
+                    {% if current_user.is_authenticated and current_user.is_administrador() %}
                     <td><a href="/Reporte/Ver/{{repor.idReporteAlmacen}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                    {% endif %}
                 </tr>
         {% endfor %}
 
     </table>
 </h4>
-<a class="btn btn-primary btn-lg" href="/Principal" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+<a class="btn btn-primary btn-lg" href="/Almacen" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
 {% endblock %}

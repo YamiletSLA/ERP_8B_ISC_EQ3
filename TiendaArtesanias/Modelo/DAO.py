@@ -222,8 +222,9 @@ class ReporteAlmacen(db.Model):
     descripcion = Column(String, nullable=False)
     movimiento = Column(String, nullable=False)
     cantidad = Column(String, nullable=False)
+    Producto = Column(String, nullable=False)
     idAlmacen = Column(Integer, ForeignKey('almacen.idAlmacen'))
-    idProducto = Column(Integer, ForeignKey('productos.idProducto'))
+
 
     def agregar(self):
         db.session.add(self)

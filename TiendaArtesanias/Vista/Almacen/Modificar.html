@@ -24,35 +24,33 @@
                         <input type="text" required  name="cantProducto"  placeholder="Ingrese cantidad" value="{{alma.cantProducto}}" maxlength="3">
                    <br>
                    <br>
-                  {%if current_user.is_authenticated and current_user.is_administrador()%}
-                        <label class="col-sm-4">Categoria:</label>
+                   <label class="col-sm-4">Categoria:</label>
                         <select class="form-select" name="categoria" >
                             <option value="" selected disabled hidden>{{alma.Categoria}}</option>
-                            <option value="{{alma.Categoria}}">Macetas</option>
-                            <option value="{{alma.Categoria}}" >Suculentas</option>
-                            <option value="{{alma.Categoria}}" >Velas</option>
+                            <option value="Macetas">Macetas</option>
+                            <option value="Suculentas">Suculentas</option>
+                            <option value="Velas">Velas</option>
                         </select>
-                  {% endif %}
                    <br>
                    <br>
                   <label class="col-sm-4">Estante:</label>
                         <select class="form-select" name="estante" >
                             <option value="" selected disabled hidden>{{alma.Estante}}</option>
-                            <option value="{{alma.Estante}}">A</option>
-                            <option value="{{alma.Estante}}" >B</option>
-                            <option value="{{alma.Estante}}" >C</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
                         </select>
                    <br>
               </h3>
              <br>
          </div>
         <div class="text text-center">
-                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-edit"></span> Modificar</button>
 
 
-                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{alma.idAlmacen}},'{{alma.cantProducto}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{alma.idAlmacen}},'{{alma.cantProducto}}')" role="button"><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
 
-             <a class="btn btn-primary btn-lg" href="/Almacen" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+             <a class="btn btn-primary btn-lg" href="/Almacen" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
          </div>
     </form>
      {% if get_flashed_messages() %}

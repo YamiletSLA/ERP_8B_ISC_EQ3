@@ -367,7 +367,7 @@ def agregarReporte():
       rp.movimiento=request.form['movimiento']
       rp.cantidad=request.form['cantidad']
       rp.idAlmacen=request.form['idAlmacen']
-      rp.idProducto=request.form['idProducto']
+      rp.Producto=request.form['producto']
       rp.agregar()
       flash('¡ Rerporte agregado con exito !')
       return render_template('RepAlm/Registrar.html',repor=rp)
@@ -387,7 +387,8 @@ def editarReporte():
     rp.movimiento = request.form['movimiento']
     rp.cantidad = request.form['cantidad']
     rp.idAlmacen = request.form['idAlmacen']
-    rp.idProducto = request.form['idProducto']
+    rp.Producto = request.form['producto']
+    print("Producto:")
     rp.editar()
     flash('La modificación del estante se realizó con exito')
     return render_template('RepAlm/Modificar.html', repor=rp)

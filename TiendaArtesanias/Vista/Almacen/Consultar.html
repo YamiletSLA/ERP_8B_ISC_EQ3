@@ -25,8 +25,9 @@
                     <td>{{alma.cantProducto}}</td>
                     <td>{{alma.Categoria}}</td>
                     <td>{{alma.Estante}}</td>
-
+                    {%if current_user.is_authenticated and current_user.is_administrador() and current_user.is_almacenista%}
                     <td><a href="/Almacen/Ver/{{alma.idAlmacen}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                    {% endif %}
                 </tr>
              {% endfor %}
 
