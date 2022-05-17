@@ -3,7 +3,7 @@ from urllib import request
 
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -448,6 +448,47 @@ def eliminarCliente(id):
     cli.eliminar(id)
     return render_template('Clientes/Consultar.html',clientes=cli.consultaGeneral())
 
+############Categorias
+
+@app.route('/Categorias')
+def ConsultaGeneralCategorias():
+    cat=Categorias()
+    categorias=cat.consultaGeneral()
+    return render_template('Categorias/Consultar.html',categorias=categorias)
+
+@app.route('/Categorias/Registrar')
+def RegistrarCategorias():
+    return render_template('Categorias/Registrar.html')
+
+@app.route('/Categorias/nuevo',methods=['post'])
+def nuevaCategoria():
+    cat = Categorias()
+    cat.nombre = request.form['nombre']
+    cat.insertar()
+    flash('Categoria registrada con exito')
+    return render_template('Categorias/Registrar.html')
+
+
+
+@app.route('/Categorias/Ver/<int:id>')
+def ConsultaIndCategorias(id):
+    cat = Categorias()
+    return render_template('Categorias/Modificar.html',cate=cat.consultaIndividual(id))
+
+@app.route('/Categorias/Modificar',methods=['post'])
+def ModificacionCategorias():
+    cat=Categorias()
+    cat.idCategorias = request.form['idCategorias']
+    cat.nombre = request.form['nombre']
+    cat.actualizar()
+    flash('La modificación de la Categoria se realizó con exito')
+    return render_template('Categorias/Modificar.html',cate=cat)
+
+@app.route('/Categorias/eliminar/<int:id>')
+def eliminarCategoria(id):
+    cat=Categorias()
+    cat.eliminar(id)
+    return render_template('Categorias/Consultar.html',categorias=cat.consultaGeneral())
 
 if __name__ == '__main__':
         db.init_app(app)
