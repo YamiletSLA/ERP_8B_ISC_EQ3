@@ -361,3 +361,30 @@ class DetalleVenta(db.Model):
 
     def consultaGeneral(self):
         return self.query.all()
+
+##################Envio
+class Envio(db.Model):
+    __tablename__ = 'Envio'
+    idEnvio = Column(Integer, primary_key=True)
+    precio = Column(Integer)
+    Transportes = Column(String(30))
+    idVentas = Column(Integer)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaIndividual(self, id):
+        return self.query.get(id)
+
+    def eliminar(self, id):
+        obj = self.consultaIndividual(id)
+        db.session.delete(obj)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()

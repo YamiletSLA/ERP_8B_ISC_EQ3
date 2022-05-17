@@ -1,0 +1,67 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,tipoEnvio){
+    resp=confirm("¿Estas seguro de eliminar el envio "+  idEnvio  +" ?");
+        if(resp==true){
+        location.href="/Envio/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Envio</p></h3>
+    <form action="/Envio/Modificar" method="post" enctype="multipart/form-data">
+         <div class="imput-group " style="padding-left: 290pt;">
+              <h3>
+                    <label class="col-sm-3">Id Envio:</label>
+                        <input type="number" name="idEnvio" readonly value="{{env.idEnvio}}" >
+                   <br>
+
+                   <br>
+                   <label class="col-sm-3">Tipo envio:</label>
+                        <input type="text" required  name="tipoEnvio"  placeholder="Ingresa el tipo de envio" value="{{env.tipoEnvio}}" maxlength="10">
+                   <br>
+
+                   <br>
+                  <label class="col-sm-3">Precio:</label>
+                        <input type="number" name="precio" readonly value="{{env.precio}}" >
+                   <br>
+                   <br>
+                  <label class="col-sm-3">Transportes:</label>
+                        <input type="text" required  name="Transportes"  placeholder="Ingresa el tipo de transporte" value="{{env.Transportes}}" maxlength="30">
+                   <br>
+
+                   <br>
+                  <label class="col-sm-3">Id Ventas:</label>
+                        <input type="number" name="idVentas" readonly value="{{env.idVentas}}" >
+                   <br>
+
+                   <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{env.idEnvio}},'{{env.tipoEnvio}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
+
+             <a class="btn btn-primary btn-lg" href="/Envio" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}

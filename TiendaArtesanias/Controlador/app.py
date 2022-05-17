@@ -2,7 +2,7 @@ from datetime import timedelta
 from urllib import request
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -590,6 +590,55 @@ def eliminarDetVenta(id):
             detventa=DetalleVenta()
             detventa.eliminar(id)
             return render_template('DetalleVenta/Consultar.html', detalleventa=detventa.consultaGeneral())
+
+####Envio
+
+@app.route('/Envio')
+def ConsultaGeneralEnvio():
+    env=Envio()
+    envio=env.consultaGeneral()
+    return render_template('Envio/Consultar.html',envio=envio)
+
+@app.route('/Envio/Registrar')
+def RegistrarEnvio():
+    return render_template('Envio/Registrar.html')
+
+
+@app.route('/Envio/nuevo',methods=['post'])
+@login_required
+def RegistroEnvio():
+    env= Envio()
+    env.tipoEnvio = request.form['tipoEnvio']
+    env.precio = request.form['precio']
+    env.Transportes = request.form['Transportes']
+    env.idVentas = request.form['idVentas']
+    env.insertar()
+    flash('Envio registrado con exito')
+    return render_template('Envio/Registrar.html')
+
+@app.route('/Envio/Ver/<int:id>')
+def ConsultaIndEnvio(id):
+    env = Envio()
+    return render_template('Envio/Modificar.html',envio=env.consultaIndividual(id))
+
+@app.route('/Envio/Modificar',methods=['post'])
+def ModificacionEnvio():
+    env=Envio()
+    env.idEnvio = request.form['idEnvio']
+    env.tipoEnvio = request.form['tipoEnvio']
+    env.precio = request.form['precio']
+    env.Transportes = request.form['Transportes']
+    env.idVentas = request.form['idVentas']
+    env.actualizar()
+    flash('La modificación del Envio se realizó con exito')
+    return render_template('Envio/Modificar.html',envio=env)
+
+@app.route('/Envio/eliminar/<int:id>')
+def eliminarEnvio(id):
+    env=Envio()
+    env.eliminar(id)
+    return render_template('Envio/Consultar.html',envio=env.consultaGeneral())
+
 
 if __name__ == '__main__':
         db.init_app(app)

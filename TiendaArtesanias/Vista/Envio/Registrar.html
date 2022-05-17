@@ -1,0 +1,45 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+     <h3 class="text text-center"><p class="text-success">Registrar envio</p> </h3>
+    <form action="/Envio/nuevo" method="post" enctype="multipart/form-data">
+        <div class="imput-group " style="padding-left: 320pt;">
+              <h3>
+
+                 <label class="col-sm-2">tipoEnvio:</label>
+                  <input type="text" required  name="tipoEnvio" placeholder="Ingrese el tipo de envio" maxlength="10">
+                <br>
+                  <label class="col-sm-2">Precio:</label>
+                        <input type="number" name="precio" placeholder="Ingrese el precio" >
+                   <br>
+                  <label class="col-sm-2">Transportes:</label>
+                  <input type="text" required  name="Transportes" placeholder="Ingrese el tipo de transporte" maxlength="30">
+                <br>
+                   <label class="col-sm-2">idVentas:</label>
+                  <input type="number" name="idVentas" placeholder="Ingrese el id de venta" >
+                <br>
+
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+              <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+            <a class="btn btn-primary btn-lg" href="/Envio" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+        </div>
+
+
+
+    </form>
+    {% if get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+       </div>
+
+    {% endif %}
+{% endblock %}
