@@ -3,7 +3,7 @@ from urllib import request
 
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -399,6 +399,55 @@ def eliminarReporte(id):
             rp=ReporteAlmacen()
             rp.eliminar(id)
             return render_template('RepAlm/Reportes.html', reporte=rp.consultaGeneral())
+
+##################CLIENTES
+
+@app.route('/Clientes')
+def ConsultaGeneralClientes():
+    cli=Clientes()
+    clientes=cli.consultaGeneral()
+    return render_template('Clientes/Consultar.html',clientes=clientes)
+
+@app.route('/Clientes/Registrar')
+def RegistrarCliente():
+    return render_template('Clientes/Registrar.html')
+
+
+@app.route('/Clientes/nuevo',methods=['post'])
+@login_required
+def RegistroCliente():
+    cli= Clientes()
+    cli.nombre = request.form['nombre']
+    cli.direccion = request.form['direccion']
+    cli.telefono = request.form['telefono']
+    cli.RFC = request.form['RFC']
+    cli.insertar()
+    flash('Cliente registrado con exito')
+    return render_template('Clientes/Registrar.html')
+
+@app.route('/Clientes/Ver/<int:id>')
+def ConsultaIndClientes(id):
+    cli = Clientes()
+    return render_template('Clientes/Modificar.html',client=cli.consultaIndividual(id))
+
+@app.route('/Clientes/Modificar',methods=['post'])
+def ModificacionClientes():
+    cli=Clientes()
+    cli.idCliente = request.form['idCliente']
+    cli.nombre = request.form['nombre']
+    cli.direccion = request.form['direccion']
+    cli.telefono = request.form['telefono']
+    cli.RFC = request.form['RFC']
+    cli.actualizar()
+    flash('La modificación del Cliente se realizó con exito')
+    return render_template('Clientes/Modificar.html',client=cli)
+
+@app.route('/Clientes/eliminar/<int:id>')
+def eliminarCliente(id):
+    cli=Clientes()
+    cli.eliminar(id)
+    return render_template('Clientes/Consultar.html',clientes=cli.consultaGeneral())
+
 
 if __name__ == '__main__':
         db.init_app(app)
