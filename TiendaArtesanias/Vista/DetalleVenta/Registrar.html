@@ -6,98 +6,58 @@
 
      <h3 class="text text-center"><p class="text-success">Registrar Detalle De Venta</p> </h3>
     <form action="/DetalleVenta/nuevo" method="post" enctype="multipart/form-data">
-        <div class="imput-group " style="padding-left: 260pt;">
+        <div class="imput-group " style="padding-left: 320pt;">
               <h3>
 
-                 <label class="col-sm-4">Cantidad:</label>
-                  <input type="number" required  name="cantidad" placeholder="Ingrese Cantidad" >
+                 <label class="col-sm-2">Cantidad:</label>
+                  <input type="number" required  name="cantidad" placeholder="Ingrese Cantidad" MIN="1" >
                 <br>
                 <br>
-                  <label class="col-sm-4">Precio:</label>
-                  <input type="number" required  name="precio" placeholder="Ingrese Precio" >
+                  <label class="col-sm-2">Precio:</label>
+                  <input type="number" required  name="precio" placeholder="Ingrese Precio" min="0">
                 <br>
                 <br>
-                   <label class="col-sm-4">SubTotal:</label>
-                   <input type="number" required  name="subTotal" placeholder="Ingrese subtotal" >
-                <br>
-                <br>
-
-                   <label class="col-sm-4">No.Venta:</label>
-                   <input type="number" required  name="idVentas" placeholder="Ingrese No.Venta" >
+                   <label class="col-sm-2">SubTotal:</label>
+                   <input type="number" required  name="subTotal" placeholder="Ingrese subtotal" min="0">
                 <br>
                 <br>
 
-                     <label class="col-sm-4">Producto:</label>
-                        <select class="form-select" name="Producto" required>
-                            <option selected>Seleccione Producto</option>
-                            <option>Octagonal c blanca</option>
-                            <option>Octagonal g blanca</option>
-                            <option>Octagonal c rosa</option>
-                            <option>Octagonal g rosa</option>
-                            <option>Octagonal c azul</option>
-                            <option>Octagonal g azul</option>
-                            <option>Hexagonal c blanca</option>
-                            <option>Hexagonal g blanca</option>
-                            <option>Hexagonal c rosa</option>
-                            <option>Hexagonal g rosa</option>
-                            <option>Hexagonal c azul</option>
-                            <option>Hexagonal g azul</option>
-                            <option>Cuadrada c blanca</option>
-                            <option>Cuadrada g blanca</option>
-                            <option>Cuadrada c rosa</option>
-                            <option>Cuadrada g rosa</option>
-                            <option>Cuadrada c azul</option>
-                            <option>Cuadrada g azul</option>
-                            <option>Redonda c blanca</option>
-                            <option>Redonda g blanca</option>
-                            <option>Redonda c rosa</option>
-                            <option>Redonda g rosa</option>
-                            <option>Redonda c azul</option>
-                            <option>Redonda g azul</option>
-                            <option>Echeveria mini</option>
-                            <option>Echeveria 3</option>
-                            <option>Echeveria 4</option>
-                            <option>Escarcha mini</option>
-                            <option>Escarcha 3</option>
-                            <option>Escarcha 4 </option>
-                            <option>Jade mini </option>
-                            <option>Jade 3 </option>
-                            <option>Jade 4 </option>
-                            <option>Perforata mini </option>
-                            <option>Perforata 3 </option>
-                            <option>Perforata 4 </option>
-                            <option>Sedum mini</option>
-                            <option>Sedum 3</option>
-                            <option>Sedum 4</option>
-                            <option>Siempreviva mini</option>
-                            <option>Siempreviva 3</option>
-                            <option>Siempreviva 4</option>
-                            <option>OrejasShrek mini</option>
-                            <option>OrejasShrek 3</option>
-                            <option>OrejasShrek 4</option>
-                            <option>GarritaOso mini</option>
-                            <option>GarritaOso 3</option>
-                            <option>GarritaOso 4</option>
-                            <option>Vela blanca c</option>
-                            <option>Vela blanca g</option>
-                            <option>Vela rosa c</option>
-                            <option>Vela rosa g</option>
-                            <option>Vela azul c</option>
-                            <option>Vela azul g</option>
-                            <option>Vela verde c</option>
-                            <option>Vela verde g</option>
-                            <option>Vela amarilla c</option>
-                            <option>Vela amarilla g</option>
-
-
-
+                   <label class="col-sm-2">No.Venta:</label>
+                   <input type="number" required  name="idVentas" placeholder="Ingrese No.Venta" min="1">
+                <br>
+                <br>
+                    <label class="col-sm-2">Producto:</label>
+                        <select class="form-select" name="producto">
+                            <option value="" selected disabled hidden>Producto</option>
+                            <optgroup label="Macetas">
+                                <option value="Octagonal">Octagonal</option>
+                                <option value="Hexagonal">Hexagonal</option>
+                                <option value="Cuadrada">Cuadrada</option>
+                                <option value="Redonda">Redonda</option>
+                            </optgroup>
+                            <optgroup label="Suculentas" >
+                                <option value="Echeveria">Echeveria</option>
+                                <option value="Escarcha">Escarcha</option>
+                                <option value="Jade">Jade</option>
+                                <option value="Perforata">Perforata</option>
+                                <option value="Sedum">Sedum</option>
+                                <option value="Siempreviva">Siempreviva</option>
+                                <option value="OrejasShrek">OrejasShrek</option>
+                                <option value="GarritaOso}">GarritaOso</option>
+                            </optgroup>
+                            <optgroup label="Velas">
+                                <option value="Vela c">Vela c</option>
+                                <option value="Vela g">Vela g</option>
+                            </optgroup>
                         </select>
                 <br>
-                <br>
-
+                   <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
               <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
-              <a class="btn btn-primary btn-lg" href="/DetalleVenta/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+              <a class="btn btn-primary btn-lg" href="/DetalleVenta" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
         </div>
 
 

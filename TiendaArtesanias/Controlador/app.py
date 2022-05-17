@@ -1,9 +1,8 @@
 from datetime import timedelta
 from urllib import request
-
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -544,7 +543,53 @@ def eliminarVenta(id):
     v.eliminar(id)
     return render_template('Ventas/Consultar.html', ventas=v.consultaGeneral())
 
-##################
+##################DETALLE VENTA
+@app.route('/DetalleVenta')
+def ConsultaGeneralDetVenta():
+    detventa= DetalleVenta()
+    return render_template('DetalleVenta/Consultar.html', detalleventa=detventa.consultaGeneral())
+
+@app.route('/DetalleVenta/Registrar')
+def RegistrarDetVenta():
+    return render_template('DetalleVenta/Registrar.html')
+
+@app.route('/DetalleVenta/nuevo',methods=['post'])
+def nuevoDetVenta():
+    detventa = DetalleVenta()
+    detventa.cantidad = request.form['cantidad']
+    detventa.precio = request.form['precio']
+    detventa.subTotal = request.form['subTotal']
+    detventa.idVentas = request.form['idVentas']
+    detventa.Producto = request.form['producto']
+    detventa.agregar()
+    flash('Detalle De Venta registrado con exito')
+    return render_template('DetalleVenta/Registrar.html')
+
+@app.route('/DetalleVenta/Ver/<int:id>')
+def ConsultaIndDetVenta(id):
+    detventa = DetalleVenta()
+    return render_template('DetalleVenta/Modificar.html',detven=detventa.consultaIndividual(id))
+
+@app.route('/DetalleVenta/Modificar',methods=['POST'])
+@login_required
+def editarDetVenta():
+    detventa= DetalleVenta()
+    detventa.idDetalleVenta = request.form['idDetalleVenta']
+    detventa.cantidad = request.form['cantidad']
+    detventa.precio = request.form['precio']
+    detventa.subTotal = request.form['subTotal']
+    detventa.idVentas = request.form['idVentas']
+    detventa.Producto = request.form['producto']
+    detventa.editar()
+    flash('La modificación del Detalle de Venta se realizó con exito')
+    return render_template('DetalleVenta/Modificar.html', detven=detventa)
+
+@app.route('/DetalleVenta/eliminar/<int:id>')
+@login_required
+def eliminarDetVenta(id):
+            detventa=DetalleVenta()
+            detventa.eliminar(id)
+            return render_template('DetalleVenta/Consultar.html', detalleventa=detventa.consultaGeneral())
 
 if __name__ == '__main__':
         db.init_app(app)
