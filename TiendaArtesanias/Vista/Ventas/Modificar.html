@@ -1,0 +1,87 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,nombre){
+    resp=confirm("¿Estas seguro de eliminar la venta "+  nombre  +" ?");
+        if(resp==true){
+        location.href="/Ventas/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Venta</p></h3>
+    <form action="/Ventas/Modificar" method="post" enctype="multipart/form-data">
+         <div class="imput-group " style="padding-left: 290pt;">
+              <h3>
+                  <br>
+                  <br>
+                    <label class="col-sm-3">Id Venta:</label>
+                        <input type="number" name="idVentas" readonly value="{{vent.idVentas}}" >
+                   <br>
+                   <br>
+                    <label class="col-sm-3">Fecha:</label>
+                        <input type="date" name="fecha" readonly value="{{vent.fecha}}" >
+                   <br>
+                   <br>
+                    <label class="col-sm-3">Total:</label>
+                        <input type="number" name="total" readonly value="{{vent.total}}" >
+                   <br>
+                  <br>
+                    <label class="col-sm-3">Pago:</label>
+                        <input type="number" name="pago" readonly value="{{vent.pago}}" >
+                   <br>
+                  <br>
+                    <label class="col-sm-3">Tipo de Venta:</label>
+                        <input type="text" name="tipoVenta" readonly value="{{vent.tipoVenta}}" >
+
+                  <label class="col-sm-3">Usuario:</label>
+                        <input type="text" name="Usuario" readonly value="{{vent.Usuario}}" >
+                   <br>
+                   <br>
+                  <label class="col-sm-3">Cliente:</label>
+                        <input type="text" name="Cliente" readonly value="{{vent.Cliente}}" >
+                   <br>
+                   <br>
+                  <label class="col-sm-3">Tipo de Pago:</label>
+                        <input type="text" name="TipoPago" readonly value="{{vent.TipoPago}}" >
+                   <br>
+                   <br>
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                   <label class="col-sm-3"> Estatus:</label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="A" checked>Activo
+                        </label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="I">Inactivo
+                        </label>
+                  {% endif %}
+                    <br>
+                   <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{vent.idVentas}},'{{vent.idVentas}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
+
+             <a class="btn btn-primary btn-lg" href="/Ventas" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
