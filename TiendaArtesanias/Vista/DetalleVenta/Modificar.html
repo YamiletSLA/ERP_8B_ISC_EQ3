@@ -1,0 +1,131 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,Producto){
+    resp=confirm("¿Estas seguro de eliminar el Detalle de Venta "+  Producto  +" ?");
+        if(resp==true){
+        location.href="/DetalleVenta/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar DetalleVenta</p></h3>
+    <form action="/DetalleVenta/Modificar" method="post" enctype="multipart/form-data">
+         <div class="imput-group " style="padding-left: 290pt;">
+              <h3>
+                   <label  class="col-sm-4">ID:</label>
+                  <input type="number" name="idDetalleVenta" readonly value="{{detven.idDetalleVenta}}" >
+                  <br>
+                  <br>
+                   <label class="col-sm-4">Cantidad:</label>
+                   <input type="number" required  name="cantidad" placeholder="Ingrese Cantidad" value="{{detven.cantidad}}">
+                <br>
+                <br>
+                  <label class="col-sm-4">Precio:</label>
+                  <input type="number" required  name="precio" placeholder="Ingrese Precio" value="{{detven.precio}} ">
+                <br>
+                <br>
+                   <label class="col-sm-4">SubTotal:</label>
+                   <input type="number" required  name="subTotal" placeholder="Ingrese subtotal" value="{{detven.subTotal}}" >
+                <br>
+                <br>
+
+                   <label class="col-sm-4">No.Venta:</label>
+                   <input type="number" required  name="idVentas" placeholder="Ingrese No.Venta" value="{{detven.idVentas}}" >
+                <br>
+                <br>
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                  <label class="col-sm-4">Producto:</label>
+                        <select class="form-select" name="Producto" required>
+                            <option selected>Seleccione Producto</option>
+                            <option value="Octagonal c blanca">Octagonal c blanca</option>
+                            <option value="Octagonal g blanca">Octagonal g blanca</option>
+                            <option value="Octagonal c rosa">Octagonal c rosa</option>
+                            <option value="Octagonal g rosa">Octagonal g rosa</option>
+                            <option value="Octagonal c azul">Octagonal c azul</option>
+                            <option value="Octagonal g azul">Octagonal g azul</option>
+                            <option value="Hexagonal c blanca">Hexagonal c blanca</option>
+                            <option value="Hexagonal g blanca">Hexagonal g blanca</option>
+                            <option value="Hexagonal c rosa">Hexagonal c rosa</option>
+                            <option value="Hexagonal g rosa">Hexagonal g rosa</option>
+                            <option value="Hexagonal c azul">Hexagonal c azul</option>
+                            <option value="Hexagonal g azul">Hexagonal g azul</option>
+                            <option value="Cuadrada c blanca">Cuadrada c blanca</option>
+                            <option value="Cuadrada g blanca">Cuadrada g blanca</option>
+                            <option value="Cuadrada c rosa">Cuadrada c rosa</option>
+                            <option value="Cuadrada g rosa">Cuadrada g rosa</option>
+                            <option value="Cuadrada c azul">Cuadrada c azul</option>
+                            <option value="Cuadrada g azul">Cuadrada g azul</option>
+                            <option value="Redonda c blanca">Redonda c blanca</option>
+                            <option value="Redonda g blanca">Redonda g blanca</option>
+                            <option value="Redonda c rosa">Redonda c rosa</option>
+                            <option value="Redonda g rosa">Redonda g rosa</option>
+                            <option value="Redonda c azul">Redonda c azul</option>
+                            <option value="Redonda g azul">Redonda g azul</option>
+                            <option value="Echeveria mini">Echeveria mini</option>
+                            <option value="Echeveria 3">Echeveria 3</option>
+                            <option value="Echeveria 4">Echeveria 4</option>
+                            <option value="Escarcha mini">Escarcha mini</option>
+                            <option value="Escarcha 3">Escarcha 3</option>
+                            <option value="Escarcha 4">Escarcha 4 </option>
+                            <option value="Jade mini">Jade mini </option>
+                            <option value="Jade 3">Jade 3 </option>
+                            <option value="Jade 4" >Jade 4 </option>
+                            <option value="Perforata mini">Perforata mini </option>
+                            <option value="Perforata 3">Perforata 3 </option>
+                            <option value="Perforata 4">Perforata 4 </option>
+                            <option value="Sedum mini">Sedum mini</option>
+                            <option value="Sedum 3">Sedum 3</option>
+                            <option value="Sedum 4">Sedum 4</option>
+                            <option value="Siempreviva mini">Siempreviva mini</option>
+                            <option value="Siempreviva 3">Siempreviva 3</option>
+                            <option value="Siempreviva 4">Siempreviva 4</option>
+                            <option value="OrejasShrek mini">OrejasShrek mini</option>
+                            <option value="OrejasShrek 3">OrejasShrek 3</option>
+                            <option value="OrejasShrek 4">OrejasShrek 4</option>
+                            <option value="GarritaOso mini">GarritaOso mini</option>
+                            <option value="GarritaOso 3">GarritaOso 3</option>
+                            <option value="GarritaOso 4">GarritaOso 4</option>
+                            <option value="Vela blanca c">Vela blanca c</option>
+                            <option value="Vela blanca g">Vela blanca g</option>
+                            <option value="Vela rosa c">Vela rosa c</option>
+                            <option value="Vela rosa g">Vela rosa g</option>
+                            <option value="Vela azul c">Vela azul c</option>
+                            <option value="Vela azul g<">Vela azul g</option>
+                            <option value="Vela verde c">Vela verde c</option>
+                            <option value="Vela verde g">Vela verde g</option>
+                            <option value="Vela amarilla c">Vela amarilla c</option>
+                            <option value="Vela amarilla g">Vela amarilla g</option>
+                        </select>
+
+                  {% endif %}
+                    <br>
+                   <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{detven.idDetalleVenta}},'{{detven.Producto}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
+
+             <a class="btn btn-primary btn-lg" href="/DetalleVenta/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
