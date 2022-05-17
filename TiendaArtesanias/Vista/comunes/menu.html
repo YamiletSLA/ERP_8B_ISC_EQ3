@@ -4,8 +4,7 @@
     <div class="navbar-header">
       <a class="navbar-brand colorTexNavBar" href="/Principal">SucuMaster</a>
     </div>
-    <ul class="nav navbar-nav">
-
+    <ul class="nav navbar-nav" >
          <li><a class="navbar-brand colorTexNavBar" href="/Usuario"><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
          <li><a class="navbar-brand colorTexNavBar" href="/TipoPago"><span class="glyphicon glyphicon-modal-window"></span> TipoPago</a></li>
          <li><a class="navbar-brand colorTexNavBar" href="/Transportes"><span class="glyphicon glyphicon-tags"></span> Transportes</a></li>
@@ -17,14 +16,17 @@
 
 
     </ul>
-
     <ul class="nav navbar-nav navbar-right">
-
-            <li><a class="navbar-brand colorTexNavBar" href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-edit"></span> Editar Perfil</a></li>
-            <li><a class="navbar-brand colorTexNavBar" href="/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
-
-
+      <li class="dropdown">
+        <a class="dropdown-toggle colorTexNavBar" data-toggle="dropdown" href="#" >
+              <span class="glyphicon glyphicon-user"></span> {{current_user.nombreCompleto}}
+              <span class="caret"></span>
+        </a>
+              <ul class="dropdown-menu">
+                <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-edit"></span> Editar mi perfil</a></li>
+                <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
+              </ul>
+      </li>
     </ul>
   </div>
-
 </nav>
