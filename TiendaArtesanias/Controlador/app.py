@@ -3,7 +3,7 @@ from urllib import request
 
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -494,8 +494,9 @@ def eliminarCategoria(id):
 
 @app.route('/Ventas')
 def consultaGeneralVentas():
-    v=Ventas()
-    return render_template('Ventas/Consultar.html',ventas=v.consultaGeneral())
+    v = Ventas()
+    venta=v.consultaGeneral()
+    return render_template('Ventas/Consultar.html',ventas=venta)
 
 @app.route('/Ventas/Registrar')
 def RegistrarVenta():
@@ -532,7 +533,7 @@ def ModificarVentas():
     v.estatus = request.form['estatus']
     v.Usuario = request.form['Usuario']
     v.Cliente = request.form['Cliente']
-    v.total = request.form['TipoPago']
+    v.TipoPago = request.form['TipoPago']
     v.actualizar()
     flash('La modificación de la venta se realizó con exito')
     return render_template('Ventas/Modificar.html',vent=v)

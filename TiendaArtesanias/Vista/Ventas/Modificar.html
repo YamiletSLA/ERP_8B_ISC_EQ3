@@ -23,33 +23,22 @@
                    <br>
                    <br>
                     <label class="col-sm-3">Fecha:</label>
-                        <input type="date" name="fecha" readonly value="{{vent.fecha}}" >
+                        <input type="date" name="fecha" value="{{vent.fecha}}" >
                    <br>
                    <br>
                     <label class="col-sm-3">Total:</label>
-                        <input type="number" name="total" readonly value="{{vent.total}}" >
+                        <input type="number" name="total" value="{{vent.total}}" >
                    <br>
                   <br>
                     <label class="col-sm-3">Pago:</label>
-                        <input type="number" name="pago" readonly value="{{vent.pago}}" >
+                        <input type="number" name="pago" value="{{vent.pago}}" >
                    <br>
                   <br>
                     <label class="col-sm-3">Tipo de Venta:</label>
-                        <input type="text" name="tipoVenta" readonly value="{{vent.tipoVenta}}" >
-
-                  <label class="col-sm-3">Usuario:</label>
-                        <input type="text" name="Usuario" readonly value="{{vent.Usuario}}" >
-                   <br>
-                   <br>
-                  <label class="col-sm-3">Cliente:</label>
-                        <input type="text" name="Cliente" readonly value="{{vent.Cliente}}" >
-                   <br>
-                   <br>
-                  <label class="col-sm-3">Tipo de Pago:</label>
-                        <input type="text" name="TipoPago" readonly value="{{vent.TipoPago}}" >
-                   <br>
-                   <br>
-                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                        <input type="text" name="tipoVenta" value="{{vent.tipoVenta}}" >
+                    <br>
+                  <br>
+                    {%if current_user.is_authenticated and current_user.is_administrador()%}
                    <label class="col-sm-3"> Estatus:</label>
                         <label class="radio-inline">
                         <input type="radio" name="estatus" value="A" checked>Activo
@@ -60,6 +49,24 @@
                   {% endif %}
                     <br>
                    <br>
+                  <label class="col-sm-3">Usuario:</label>
+                        <input type="text" name="Usuario" value="{{vent.Usuario}}" >
+                   <br>
+                   <br>
+                  <label class="col-sm-3">Cliente:</label>
+                        <input type="text" name="Cliente" value="{{vent.Cliente}}" >
+                   <br>
+                   <br>
+                  <label class="col-sm-3">Tipo de Pago:</label>
+                        <select class="form-select" name="TipoPago">
+                            <option selected>{{vent.TipoPago}}</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta" >Tarjeta</option>
+                            <option value="Cheque" >Cheque</option>
+                        </select>
+                   <br>
+                   <br>
+
               </h3>
              <br>
          </div>

@@ -8,9 +8,10 @@
 <div class="text text-center">
 </div>
 
-        {%if current_user.is_authenticated and current_user.is_administrador()%}
+        {%if current_user.is_authenticated and current_user.is_administrador() and current_user.is_vendedor%}
         <a class="btn btn-primary btn-lg" href="/Ventas/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
         {% endif %}
+        <a style="float: right;" class="btn btn-default2" href="/TipoPago" role="button"><span class="glyphicon glyphicon-modal-window"></span> Tipos de Pago</a>
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
@@ -27,7 +28,7 @@
             <th>Modificar</th>
             {% endif %}
         </thead>
-        {% for vent in transportes %}
+        {% for vent in ventas %}
                 <tr class="active">
                     <td>{{vent.idVentas}}</td>
                     <td>{{vent.fecha}}</td>
@@ -35,9 +36,9 @@
                     <td>{{vent.pago}}</td>
                     <td>{{vent.tipoVenta}}</td>
                     <td>{{vent.estatus}}</td>
-                    <td>{{vent.nombreUsuario}}</td>
-                    <td>{{vent.nombre}}</td>
-                    <td>{{vent.tipo}}</td>
+                    <td>{{vent.Usuario}}</td>
+                    <td>{{vent.Cliente}}</td>
+                    <td>{{vent.TipoPago}}</td>
                     {%if current_user.is_authenticated and current_user.is_administrador()%}
                     <td><a href="/Ventas/Ver/{{vent.idVentas}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
                     {% endif %}

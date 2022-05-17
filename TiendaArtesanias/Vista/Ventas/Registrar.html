@@ -25,22 +25,34 @@
                   <input type="text" required  name="tipoVenta" placeholder="Ingrese Tipo de Venta" maxlength="20">
                 <br>
                 <br>
-                  <label class="col-sm-2">Estatus:</label>
-                  <input type="text" required  name="estatus" placeholder="Estatus" maxlength="20">
+                  {%if current_user.is_authenticated and current_user.is_administrador()%}
+                   <label class="col-sm-2"> Estatus:</label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="A" checked>Activo
+                        </label>
+                        <label class="radio-inline">
+                        <input type="radio" name="estatus" value="I">Inactivo
+                        </label>
+                  {% endif %}
                 <br>
                 <br>
                  <label class="col-sm-2">Usuario:</label>
-                  <input type="text" required  name="Usuario" placeholder="Ingrese Usuario" maxlength="20">
+                  <input type="text" required  name="Usuario" placeholder="Ingrese Usuario" maxlength="20" value="{{current_user.nombreUsuario}}">
                 <br>
                 <br>
                   <label class="col-sm-2">Cliente:</label>
                   <input type="text" required  name="Cliente" placeholder="Ingrese Cliente" maxlength="20">
                 <br>
                 <br>
-                   <label class="col-sm-2">Tipo de Pago:</label>
-                  <input type="text" required  name="TipoPago" placeholder="Ingrese Tipo de Pago" maxlength="20">
-                <br>
-                <br>
+                  <label class="col-sm-2">Tipo de Pago:</label>
+                        <select class="form-select" name="TipoPago">
+                            <option selected>Tipo Pago</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta" >Tarjeta</option>
+                            <option value="Cheque" >Cheque</option>
+                        </select>
+                   <br>
+                   <br>
               </h3>
              <br>
          </div>
