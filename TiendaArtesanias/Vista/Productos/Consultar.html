@@ -12,6 +12,8 @@
         {%if current_user.is_authenticated and current_user.is_administrador()%}
         <a class="btn btn-primary btn-lg" href="/Productos/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
         {% endif %}
+
+
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
@@ -42,5 +44,5 @@
     </table>
 
 </h4>
-<a class="btn btn-primary btn-lg" href="/Principal" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+<a class="btn btn-primary btn-lg" href="/Categorias" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
 {% endblock %}

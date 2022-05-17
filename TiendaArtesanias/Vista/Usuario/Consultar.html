@@ -9,7 +9,10 @@
 </div>
 
     {%if current_user.is_authenticated and current_user.is_administrador()%}
-    <a class="btn btn-primary btn-lg" href="/Usuario/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+        <a class="btn btn-primary btn-lg" href="/Usuario/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+    {% endif %}
+    {%if current_user.is_authenticated and current_user.is_administrador() and current_user.is_vendedor%}
+        <a style="float: right;" class="btn btn-default2" href="/Clientes" role="button"><span class="glyphicon glyphicon-user"></span> Clienntes</a>
     {% endif %}
 
 <h4>
