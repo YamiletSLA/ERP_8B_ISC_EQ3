@@ -136,7 +136,7 @@ class Productos(db.Model):
     nombre = Column(String(20))
     descripcion = Column(String(50))
     precio = Column(Integer)
-    idCategorias = Column(Integer)
+    Categoria = Column(String, nullable=False)
 
     def insertar(self):
         db.session.add(self)

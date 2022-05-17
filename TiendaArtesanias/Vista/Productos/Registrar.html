@@ -6,27 +6,37 @@
 
      <h3 class="text text-center"><p class="text-success">Registrar Productos</p> </h3>
     <form action="/Productos/nuevo" method="post" enctype="multipart/form-data">
-        <div class="text text-center">
+        <div class="imput-group " style="padding-left: 290pt;">
               <h3>
 
-                 <label>Id Producto:</label>
+                 <label class="col-sm-3">Producto:</label>
                         <input type="number" name="idProducto" placeholder="Ingrese id del producto" >
                    <br>
-                   <label>Nombre:</label>
+                   <br>
+                   <label class="col-sm-3">Nombre:</label>
                         <input type="text" required  name="nombre"  placeholder="Ingrese nombre del producto"  maxlength="20">
                    <br>
-                   <label>Descripción:</label>
+                   <br>
+                   <label class="col-sm-3">Descripción:</label>
                         <input type="text" required  name="descripcion"  placeholder="Ingrese una descripción"  maxlength="50">
                    <br>
-                   <label>Precio</label>
+                   <br>
+                   <label class="col-sm-3">Precio</label>
                         <input type="text" required  name="precio"  placeholder="Ingrese precio" >
                    <br>
-                  <label>Id Categorias:</label>
-                        <input type="text" name="idCategorias" placeholder="Ingrese id categoria ">
                    <br>
-
-
+                  <label class="col-sm-3">Categoria:</label>
+                        <select class="form-select" name="categoria" required>
+                            <option selected disabled hidden>Categoria</option>
+                            <option>Macetas</option>
+                            <option>Suculentas</option>
+                            <option>Velas</option>
+                        </select>
+                   <br>
               </h3>
+             <br>
+         </div>
+        <div class="text text-center">
 
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>

@@ -19,7 +19,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Precio</th>
-            <th>idCategorias</th>
+            <th>Cateoria</th>
             {%if current_user.is_authenticated and current_user.is_administrador()%}
             <th>editar</th>
             {% endif %}
@@ -31,7 +31,7 @@
                     <td>{{produc.nombre}}</td>
                     <td>{{produc.descripcion}}</td>
                     <td>{{produc.precio}}</td>
-                    <td>{{produc.idCategorias}}</td>
+                    <td>{{produc.Categoria}}</td>
 
                     {%if current_user.is_authenticated and current_user.is_administrador()%}
                     <td><a href="/Productos/Ver/{{produc.idProducto}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
@@ -39,7 +39,6 @@
                 </tr>
              {% endfor %}
 
-    </table>
     </table>
 
 </h4>

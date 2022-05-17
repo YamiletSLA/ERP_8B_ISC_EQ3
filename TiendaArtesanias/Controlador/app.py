@@ -216,7 +216,7 @@ def nuevoProductos():
     pr.nombre = request.form['nombre']
     pr.descripcion = request.form['descripcion']
     pr.precio = request.form['precio']
-    pr.idCategorias= request.form['idCategorias']
+    pr.Categoria= request.form['categoria']
 
     pr.insertar()
     flash('Producto registrado con exito')
@@ -234,7 +234,7 @@ def ModificarProduct():
     pr.nombre = request.form['nombre']
     pr.descripcion = request.form['descripcion']
     pr.precio = request.form['precio']
-    pr.idCategorias = request.form['idCategorias']
+    pr.Categoria = request.form['categoria']
     pr.actualizar()
     flash('La modificación del producto se realizó con exito')
     return render_template('Productos/Modificar.html',produc=pr)

@@ -14,26 +14,36 @@
 </Script>
 <h3 class="text text-center"><p class="text-success">Modificar Producto</p></h3>
     <form action="/Productos/Modificar" method="post" enctype="multipart/form-data">
-         <div class="text text-center">
+          <div class="imput-group " style="padding-left: 290pt;">
               <h3>
-                    <label>Id Producto:</label>
+                    <label class="col-sm-3">Id Producto:</label>
                         <input type="number" name="idProducto" readonly value="{{produc.idProducto}}" >
                    <br>
-                   <label>Nombre:</label>
+                   <br>
+                   <label class="col-sm-3">Nombre:</label>
                         <input type="text" required  name="nombre"  placeholder="Ingrese nombre del producto" value="{{produc.nombre}}" maxlength="20">
                    <br>
-                   <label>Descripción:</label>
+                   <br>
+                   <label class="col-sm-3">Descripción:</label>
                         <input type="text" required  name="descripcion"  placeholder="Descripción" value="{{produc.descripcion}}" maxlength="50">
                    <br>
-                   <label>Precio</label>
+                   <br>
+                   <label class="col-sm-3">Precio</label>
                         <input type="text" required  name="precio"  placeholder="Precio" value="{{produc.precio}}" >
                    <br>
-                  <label>Id Categorias:</label>
-                        <input type="text" name="idCategorias" readonly value="{{produc.idCategorias}}" >
                    <br>
-
+                        <label class="col-sm-3">Categoria:</label>
+                        <select class="form-select" name="categoria" >
+                            <option value="" selected disabled hidden>{{produc.Categoria}}</option>
+                            <option value="Macetas">Macetas</option>
+                            <option value="Suculentas">Suculentas</option>
+                            <option value="Velas">Velas</option>
+                        </select>
+                   <br>
               </h3>
-
+             <br>
+         </div>
+        <div class="text text-center">
                 {%if current_user.is_authenticated and current_user.is_administrador()%}
                 <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
                 {% endif %}
