@@ -490,6 +490,61 @@ def eliminarCategoria(id):
     cat.eliminar(id)
     return render_template('Categorias/Consultar.html',categorias=cat.consultaGeneral())
 
+############VENTAS
+
+@app.route('/Ventas')
+def consultaGeneralVentas():
+    v=Ventas()
+    return render_template('Ventas/Consultar.html',ventas=v.consultaGeneral())
+
+@app.route('/Ventas/Registrar')
+def RegistrarVenta():
+    return render_template('Ventas/Registrar.html')
+
+@app.route('/Ventas/nuevo',methods=['post'])
+def nuevaVenta():
+    v = Ventas()
+    v.fecha=request.form['fecha']
+    v.total=request.form['total']
+    v.pago = request.form['pago']
+    v.tipoVenta = request.form['tipoVenta']
+    v.estatus = request.form['estatus']
+    v.Usuario = request.form['Usuario']
+    v.Cliente = request.form['Cliente']
+    v.TipoPago = request.form['TipoPago']
+    v.insertar()
+    flash('Venta registrada con exito')
+    return render_template('Ventas/Registrar.html')
+
+@app.route('/Ventas/Ver/<int:id>')
+def ConsultaIndVentas(id):
+    v = Ventas()
+    return render_template('Ventas/Modificar.html',vent=v.consultaIndividual(id))
+
+@app.route('/Ventas/Modificar',methods=['post'])
+def ModificarVentas():
+    v= Ventas()
+    v.idVentas = request.form['idVentas']
+    v.fecha = request.form['fecha']
+    v.total = request.form['total']
+    v.pago = request.form['pago']
+    v.tipoVenta = request.form['tipoVenta']
+    v.estatus = request.form['estatus']
+    v.Usuario = request.form['Usuario']
+    v.Cliente = request.form['Cliente']
+    v.total = request.form['TipoPago']
+    v.actualizar()
+    flash('La modificación de la venta se realizó con exito')
+    return render_template('Ventas/Modificar.html',vent=v)
+
+@app.route('/Ventas/eliminar/<int:id>')
+def eliminarVenta(id):
+    v=Ventas()
+    v.eliminar(id)
+    return render_template('Ventas/Consultar.html', ventas=v.consultaGeneral())
+
+##################
+
 if __name__ == '__main__':
         db.init_app(app)
         app.run(port=3006, debug=True)

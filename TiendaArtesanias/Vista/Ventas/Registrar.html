@@ -1,0 +1,64 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+     <h3 class="text text-center"><p class="text-success">Registrar Venta</p> </h3>
+    <form action="/Ventas/nuevo" method="post" enctype="multipart/form-data">
+        <div class="imput-group " style="padding-left: 320pt;">
+              <h3>
+
+                  <label class="col-sm-2">Fecha:</label>
+                  <input type="date" required  name="fecha" placeholder="Ingrese fecha" maxlength="20">
+                <br>
+                <br>
+                  <label class="col-sm-2">Total:</label>
+                  <input type="number" required  name="total" placeholder="Ingrese total" maxlength="20" min="0">
+                <br>
+                <br>
+                    <label class="col-sm-2">Pago:</label>
+                  <input type="number" required  name="pago" placeholder="Ingrese Pago" maxlength="20" min="0">
+                <br>
+                <br>
+                   <label class="col-sm-2">Tipo de Venta:</label>
+                  <input type="text" required  name="tipoVenta" placeholder="Ingrese Tipo de Venta" maxlength="20">
+                <br>
+                <br>
+                  <label class="col-sm-2">Estatus:</label>
+                  <input type="text" required  name="estatus" placeholder="Estatus" maxlength="20">
+                <br>
+                <br>
+                 <label class="col-sm-2">Usuario:</label>
+                  <input type="text" required  name="Usuario" placeholder="Ingrese Usuario" maxlength="20">
+                <br>
+                <br>
+                  <label class="col-sm-2">Cliente:</label>
+                  <input type="text" required  name="Cliente" placeholder="Ingrese Cliente" maxlength="20">
+                <br>
+                <br>
+                   <label class="col-sm-2">Tipo de Pago:</label>
+                  <input type="text" required  name="TipoPago" placeholder="Ingrese Tipo de Pago" maxlength="20">
+                <br>
+                <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+              <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+            <a class="btn btn-primary btn-lg" href="/Ventas" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+        </div>
+
+
+
+    </form>
+    {% if get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+       </div>
+
+    {% endif %}
+{% endblock %}

@@ -302,3 +302,34 @@ class Categorias(db.Model):
     def consultaGeneral(self):
         return self.query.all()
 
+#####Ventas
+class Ventas(db.Model):
+    __tablename__ = 'ventas'
+    idVentas = Column(Integer, primary_key=True)
+    fecha = Column(Date)
+    total=Column(Integer)
+    pago=Column(Integer)
+    tipoVenta = Column(String(10))
+    estatus = Column(String(1))
+    Usuario = Column(String(15))
+    Cliente = Column(String(30))
+    TipoPago = Column(String(15))
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaIndividual(self, id):
+        return self.query.get(id)
+
+    def eliminar(self, id):
+        obj = self.consultaIndividual(id)
+        db.session.delete(obj)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
