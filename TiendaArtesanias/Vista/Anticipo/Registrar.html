@@ -1,0 +1,52 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+     <h3 class="text text-center"><p class="text-success">Registrar Anticipo</p> </h3>
+    <form action="/Anticipo/nuevo" method="post" enctype="multipart/form-data">
+        <div class="imput-group " style="padding-left: 320pt;">
+              <h3>
+
+                <br>
+                <label class="col-sm-2">Fecha:</label>
+                <input type="text" required  name="fecha" placeholder="Ingrese fecha" maxlength="15">
+                <br>
+                <br>
+                 <label class="col-sm-2">Importe:</label>
+                  <input type="text" required  name="importe" placeholder="Ingrese Importe" maxlength="6">
+                <br>
+                <br>
+                  <label class="col-sm-2">Tipo de Pago:</label>
+                  <select class="form-select" name="TipoPago" >
+                      <option selected disabled hidden>TipoPago</option>
+                      <option>Tarjeta</option>
+                      <option>Efectivo</option>
+                      <option>Cheques</option>
+                      <option>Vales</option>
+                  </select>
+                <br>
+                <br>
+                   <label class="col-sm-3"> No. Venta:</label>
+                   <input type="number" required  name="idVentas" placeholder="No. Venta" maxlength="3" min="1">
+                 <br>
+                <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+              <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+            <a class="btn btn-primary btn-lg" href="/Anticipo" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+        </div>
+
+    </form>
+    {% if get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+       </div>
+
+    {% endif %}

@@ -1,0 +1,42 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+
+<h3 class="text text-center"><p class="text-success">Anticipo</p></h3>
+<div class="text text-center">
+</div>
+
+        {%if current_user.is_authenticated and current_user.is_administrador()%}
+        <a class="btn btn-primary btn-lg" href="/Anticipo/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Regis</a>
+        {% endif %}trar
+<h4>
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <th>Id Anticipo</th>
+            <th>fecha</th>
+            <th>importe</th>
+            <th>TipoPago</th>
+            <th>idVentas</th>
+            {%if current_user.is_authenticated and current_user.is_administrador()%}
+            <th>Modificar</th>
+            {% endif %}
+        </thead>
+        {% for trans in Anticipo %}
+                <tr class="active">
+                    <td>{{trans.idAnticipo}}</td>
+                    <td>{{antic.fecha}}</td>
+                    <td>{{antic.importe}}</td>
+                    <td>{{antic.TipoPago}}</td>
+                    <td>{{antic.idVentas}}</td>
+                    {%if current_user.is_authenticated and current_user.is_administrador()%}
+                    <td><a href="/Anticipo/Ver/{{antic.idAnticipo}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
+                    {% endif %}
+                </tr>
+        {% endfor %}
+
+    </table>
+</h4>
+<a class="btn btn-primary btn-lg" href="/Principal" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
+{% endblock %}

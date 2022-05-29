@@ -2,7 +2,7 @@ from datetime import timedelta
 from urllib import request
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio, Anticipo
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -638,6 +638,54 @@ def eliminarEnvio(id):
     env=Envio()
     env.eliminar(id)
     return render_template('Envio/Consultar.html',envio=env.consultaGeneral())
+
+@app.route('/Anticipo')
+def consultaGeneralAnticipo():
+    ant=Anticipo()
+    return render_template('Anticipo/Consultar.html',Anticipo=ant.consultaGeneral())
+
+@app.route('/Anticipo/Registrar')
+def RegistrarAnticipo():
+    return render_template('Anticipo/Registrar.html')
+
+@app.route('/Anticipo/nuevo',methods=['post'])
+def nuevoAnticipo():
+    ant = Anticipo()
+    ant.idAnticipo=request.form['No.Anticipo']
+    ant.nombre = request.form['nombre']
+    ant.fecha=request.form['fecha']
+    ant.importe=request.form['importe']
+    ant.importe = request.form['NoVenta']
+    ant.TipoPago=request.form['TipoPago']
+    ant.insertar()
+    flash('Anticipo registrado con exito')
+    return render_template('Anticipo/Registrar.html')
+
+@app.route('/Anticipo/Ver/<int:id>')
+def ConsultaIdAnticipo(id):
+    ant=Anticipo()
+    return render_template('Anticipo/Modificar.html',antic=ant.consultaIndividual(id))
+
+@app.route('/Anticipo/Modificar',methods=['post'])
+def ModificarAnticipo():
+    ant = Anticipo()
+    ant.nombre = request.form['nombre']
+    ant.fecha=request.form['fecha']
+    ant.importe=request.form['importe']
+    ant.TipoPago=request.form['TipoPago']
+
+    ant.actualizar()
+    flash('La modificación del Anticipo se realizó con exito')
+    return render_template('Anticipo/Modificar.html',antic=ant)
+
+@app.route('/Anticipo/eliminar/<int:id>')
+def eliminarAnticipo(id):
+    ant=Anticipo()
+    ant.eliminar(id)
+    return render_template('Anticipo/Consultar.html', Antic=ant.consultaGeneral())
+
+
+
 
 
 if __name__ == '__main__':

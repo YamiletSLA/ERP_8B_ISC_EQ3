@@ -1,0 +1,56 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,importe){
+    resp=confirm("¿Estas seguro de eliminar el Anticipo "+  importe  +" ?");
+        if(resp==true){
+        location.href="/Anticipo/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Anticipo</p></h3>
+    <form action="/Anticipo/Modificar" method="post" enctype="multipart/form-data">
+         <div class="imput-group " style="padding-left: 290pt;">
+              <h3>
+                    <label class="col-sm-3">Id Anticipo:</label>
+                        <input type="number" name="idAnticipo" readonly value="{{antic.idAnticipo}}" >
+                   <br>
+
+                   <br>
+                   <label class="col-sm-3">importe:</label>
+                        <input type="text" required  name="importe"  placeholder="Ingrese importe" value="{{antic.importe}}" maxlength="">
+                   <br>
+                   <br>
+                   <label class="col-sm-3">TipoPago:</label>
+                        <input type="text" required  name="TipoPago"  placeholder="Seleccione el Tipo de Pago" value="{{antic.TipoPago}}" maxlength="10">
+                   <br>
+                   <br>
+              </h3>
+             <br>
+         </div>
+        <div class="text text-center">
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{antic.idAnticipo}},'{{antic.importe}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
+
+             <a class="btn btn-primary btn-lg" href="/Anticipo/1" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
