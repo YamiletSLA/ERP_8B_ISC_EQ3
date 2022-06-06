@@ -419,3 +419,30 @@ class Anticipo(db.Model):
     # def consultaGeneral(self, pagina):
     #     return self.query.order_by(Anticipo.idAnticipo.asc()).paginate(pagina, per_page=5, error_out=False).items
     #     # return self.query.all()
+
+
+class Especiales(db.Model):
+    __tablename__ = 'Especiales'
+    idEspeciales=Column(Integer, primary_key=True)
+    nombre=Column(String(20))
+    descripcion = Column(String(20))
+    costo= Column(Integer)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def eliminar(self,id):
+        obj = self.consultaIndividual(id)
+        db.session.delete(obj)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()

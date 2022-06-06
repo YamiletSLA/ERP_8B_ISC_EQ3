@@ -1,0 +1,58 @@
+{% extends "comunes/base.html" %}
+{% block navbar %}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block principal %}
+<Script>
+    function eliminar(Id,nombre){
+    resp=confirm("¿Estas seguro de eliminar el Especial "+  nombre  +" ?");
+        if(resp==true){
+        location.href="/Especiales/eliminar/"+Id
+        }
+        return;
+    }
+</Script>
+<h3 class="text text-center"><p class="text-success">Modificar Especial</p></h3>
+    <form action="/Especiales/Modificar" method="post" enctype="multipart/form-data">
+         <div class="imput-group " style="padding-left: 260pt;">
+              <h3>
+                   <label class="col-sm-4">Id Transporte:</label>
+                        <input type="number" name="idEspeciales" readonly value="{{espe.idEspeciales}}" >
+                   <br>
+                   <br>
+
+                   <label class="col-sm-4">Nombre:</label>
+                        <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{espe.nombre}}" maxlength="20">
+                   <br>
+                   <br>
+                   <label class="col-sm-4">Descripcion:</label>
+                        <input type="text" required  name="descripcion"  placeholder="Ingrese descripcion" value="{{espe.descripcion}}" maxlength="20">
+                   <br>
+                   <br>
+                     <label class="col-sm-4">Costo:</label>
+                        <input type="number" required  name="costo"  placeholder="Ingrese el costo" value="{{espe.costo}}">
+                   <br>
+                   <br>
+
+              </h3>
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="submit" class="btn btn-primary btn-lg" role="button"><img src="{{url_for('static',filename='imagenes/save.png')}}"> Modificar</button>
+                {% endif %}
+
+                {%if current_user.is_authenticated and current_user.is_administrador()%}
+                <button type="button" class="btn btn-danger btn-lg" onclick="eliminar({{espe.idEspeciales}},'{{espe.nombre}}')" role="button"><img src="{{url_for('static',filename='imagenes/eliminar.png')}}"> Eliminar</button>
+                {% endif %}
+
+             <a class="btn btn-primary btn-lg" href="/Especiales" role="button"><img src="{{url_for('static',filename='imagenes/prev.gif')}}"> Regresar</a>
+         </div>
+    </form>
+     {% if get_flashed_messages() %}
+         <div class="alert alert-success alert-dismissible">
+             {% for message in get_flashed_messages() %}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{message}}</strong>
+            {% endfor %}
+         </div>
+     {% endif %}
+{% endblock %}
