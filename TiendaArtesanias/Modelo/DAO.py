@@ -396,7 +396,7 @@ class Anticipo(db.Model):
     fecha = Column(String, nullable=False)
     importe = Column(Integer)
     TipoPago = Column(String, ForeignKey('TipoPago.idTipoPago'))
-    NoVenta = Column(Integer, ForeignKey('ventas.idVentas'))
+    idVentas = Column(Integer, ForeignKey('ventas.idVentas'))
 
     def insertar(self):
         db.session.add(self)
@@ -419,3 +419,4 @@ class Anticipo(db.Model):
     # def consultaGeneral(self, pagina):
     #     return self.query.order_by(Anticipo.idAnticipo.asc()).paginate(pagina, per_page=5, error_out=False).items
     #     # return self.query.all()
+

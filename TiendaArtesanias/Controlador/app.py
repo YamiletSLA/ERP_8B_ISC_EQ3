@@ -2,16 +2,16 @@ from datetime import timedelta
 from urllib import request
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio, Anticipo
+from TiendaArtesanias.Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio, Anticipo
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@127.0.0.1:3306/sucumaster'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3306/sucumaster'
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://userSucuMaster:hola.123@localhost:3306/sucumaster'
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@127.0.0.1:3006/sucumaster'
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:hola.123@localhost:3006/sucumaster'
 
-#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/sucumaster'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3006/sucumaster'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='cl4v3'
@@ -185,7 +185,6 @@ def ConsultaIndTransportes(id):
 @app.route('/Transportes/Modificar',methods=['post'])
 def ModificarTransportes():
     t= Transportes()
-    t.idTipoPago = request.form['Id']
     t.nombre = request.form['nombre']
     t.telefono=request.form['telefono']
     t.estatus=request.form['estatus']
@@ -656,7 +655,7 @@ def nuevoAnticipo():
     ant.nombre = request.form['nombre']
     ant.fecha=request.form['fecha']
     ant.importe=request.form['importe']
-    ant.importe = request.form['NoVenta']
+    ant.idVentas = request.form['idVentas']
     ant.TipoPago=request.form['TipoPago']
     ant.insertar()
     flash('Anticipo registrado con exito')
@@ -688,7 +687,6 @@ def eliminarAnticipo(id):
 
 
 
-
 if __name__ == '__main__':
         db.init_app(app)
-        app.run(port=3006, debug=True)
+        app.run( debug=True)

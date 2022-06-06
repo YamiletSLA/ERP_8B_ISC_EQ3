@@ -22,11 +22,11 @@
 
                    <br>
                    <label class="col-sm-3">Nombre:</label>
-                        <input type="text" required  name="nombre"  placeholder="Ingrese nombre" value="{{trans.nombre}}" maxlength="20">
+                        <input type="text" name="nombre"  placeholder="Ingrese nombre" value="{{trans.nombre}}" maxlength="20">
                    <br>
                    <br>
                    <label class="col-sm-3">Telefono:</label>
-                        <input type="text" required  name="telefono"  placeholder="Ingrese el Telefono" value="{{trans.telefono}}" maxlength="10">
+                        <input type="text" name="telefono"  placeholder="Ingrese el Telefono" value="{{trans.telefono}}" maxlength="10">
                    <br>
                    <br>
                   {%if current_user.is_authenticated and current_user.is_administrador()%}

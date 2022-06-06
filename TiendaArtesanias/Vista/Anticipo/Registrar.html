@@ -4,7 +4,9 @@
 {% endblock %}
 {% block principal %}
 
+    {%if current_user.is_authenticated and current_user.is_administrador()or current_user.is_vendedor()%}
      <h3 class="text text-center"><p class="text-success">Registrar Anticipo</p> </h3>
+    {% endif %}
     <form action="/Anticipo/nuevo" method="post" enctype="multipart/form-data">
         <div class="imput-group " style="padding-left: 320pt;">
               <h3>
@@ -36,7 +38,9 @@
              <br>
          </div>
         <div class="text text-center">
-              <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+            {%if current_user.is_authenticated and current_user.is_administrador()or current_user.is_vendedor()%}
+            <button type="submit" class="btn btn-primary btn-lg" role="button" ><img src="{{url_for('static',filename='imagenes/save.png')}}"> Guardar</button>
+            {% endif %}
             <a class="btn btn-primary btn-lg" href="/Anticipo" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Regresar</a>
         </div>
 

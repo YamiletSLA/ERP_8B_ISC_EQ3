@@ -8,9 +8,9 @@
 <div class="text text-center">
 </div>
 
-        {%if current_user.is_authenticated and current_user.is_administrador()%}
-        <a class="btn btn-primary btn-lg" href="/Anticipo/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Regis</a>
-        {% endif %}trar
+        {%if current_user.is_authenticated and current_user.is_administrador() or current_user.is_vendedor()%}
+        <a class="btn btn-primary btn-lg" href="/Anticipo/Registrar" role="button"><img src="{{url_for('static',filename='imagenes/add.gif')}}">Registrar</a>
+        {% endif %}
 <h4>
     <table class="table table-dark table-hover table-bordered">
         <thead>
@@ -19,18 +19,18 @@
             <th>importe</th>
             <th>TipoPago</th>
             <th>idVentas</th>
-            {%if current_user.is_authenticated and current_user.is_administrador()%}
+            {%if current_user.is_authenticated and current_user.is_administrador() or current_user.is_vendedor()%}
             <th>Modificar</th>
             {% endif %}
         </thead>
-        {% for trans in Anticipo %}
+        {% for antic in Anticipo %}
                 <tr class="active">
-                    <td>{{trans.idAnticipo}}</td>
+                    <td>{{antic.idAnticipo}}</td>
                     <td>{{antic.fecha}}</td>
                     <td>{{antic.importe}}</td>
                     <td>{{antic.TipoPago}}</td>
                     <td>{{antic.idVentas}}</td>
-                    {%if current_user.is_authenticated and current_user.is_administrador()%}
+                    {%if current_user.is_authenticated and current_user.is_administrador() or current_user.is_vendedor()%}
                     <td><a href="/Anticipo/Ver/{{antic.idAnticipo}}"><img src="{{url_for('static',filename='imagenes/editar.png')}}"> Ver</a></td>
                     {% endif %}
                 </tr>
