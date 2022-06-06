@@ -14,6 +14,17 @@ Zarket-Sukumaster
 {% endblock %}
 <!-- Superior -->
 {% block body %}
+
+ <script>
+        var hoy = new Date();
+        var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+        var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+
+        var fechaYHora = fecha + ' ' + hora;
+
+        document.body.innerHTML = "<h2>" + fechaYHora + "</h2>";
+    </script>
+
     <div class="wave" style="height: 120px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-7.05,65.63 C134.02,139.63 296.56,33.05 501.41,74.50 L500.00,0.00 L-4.79,-10.36 Z" style="stroke: none; fill: #9ac3df;"></path></svg></div>
         <div class="jumbotron">
             <div class="container text-center">
