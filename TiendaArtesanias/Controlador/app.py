@@ -652,11 +652,9 @@ def RegistrarAnticipo():
 @app.route('/Anticipo/nuevo',methods=['post'])
 def nuevoAnticipo():
     ant = Anticipo()
-    ant.idAnticipo=request.form['No.Anticipo']
-    ant.nombre = request.form['nombre']
     ant.fecha=request.form['fecha']
     ant.importe=request.form['importe']
-    ant.importe = request.form['NoVenta']
+    ant.idVentas = request.form['idVentas']
     ant.TipoPago=request.form['TipoPago']
     ant.insertar()
     flash('Anticipo registrado con exito')

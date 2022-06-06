@@ -13,11 +13,11 @@
 
                 <br>
                 <label class="col-sm-2">Fecha:</label>
-                <input type="text" required  name="fecha" placeholder="Ingrese fecha" maxlength="15">
+                  <input type="date" name="fecha" placeholder="Ingrese fecha" maxlength="20">
                 <br>
                 <br>
                  <label class="col-sm-2">Importe:</label>
-                  <input type="text" required  name="importe" placeholder="Ingrese Importe" maxlength="6">
+                  <input type="text" name="importe" placeholder="Ingrese Importe" maxlength="6">
                 <br>
                 <br>
                   <label class="col-sm-2">Tipo de Pago:</label>
@@ -31,7 +31,7 @@
                 <br>
                 <br>
                    <label class="col-sm-3"> No. Venta:</label>
-                   <input type="number" required  name="idVentas" placeholder="No. Venta" maxlength="3" min="1">
+                   <input type="number" name="idVentas" placeholder="No. Venta" maxlength="3" min="1">
                  <br>
                 <br>
               </h3>
@@ -54,3 +54,4 @@
        </div>
 
     {% endif %}
+{% endblock %}

@@ -396,7 +396,7 @@ class Anticipo(db.Model):
     fecha = Column(String, nullable=False)
     importe = Column(Integer)
     TipoPago = Column(String, ForeignKey('TipoPago.idTipoPago'))
-    NoVenta = Column(Integer, ForeignKey('ventas.idVentas'))
+    idVentas = Column(Integer, ForeignKey('ventas.idVentas'))
 
     def insertar(self):
         db.session.add(self)
