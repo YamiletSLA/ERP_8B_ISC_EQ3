@@ -2,7 +2,7 @@ from datetime import timedelta
 from urllib import request
 from flask import Flask,render_template,request,flash,redirect,url_for,abort
 from flask_bootstrap import Bootstrap
-from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio, Anticipo
+from Modelo.DAO import db, TipoPago, Usuario, Transportes, Productos, Estante, Almacen, ReporteAlmacen, Clientes, Categorias, Ventas, DetalleVenta, Envio, Anticipo, Especiales
 from flask_login import current_user,login_user,logout_user, login_manager,login_required,LoginManager
 
 app=Flask(__name__,template_folder='../vista',static_folder='../static')
@@ -686,7 +686,46 @@ def eliminarAnticipo(id):
     return render_template('Anticipo/Consultar.html', Antic=ant.consultaGeneral())
 
 
+@app.route('/Especiales')
+def ConsultaGeneralEspecial():
+    espe= Especiales()
+    return render_template('Especiales/Consultar.html',especiales=espe.consultaGeneral())
 
+@app.route('/Especiales/Registrar')
+def RegistrarEspecial():
+    return render_template('Especiales/Registrar.html')
+
+@app.route('/Especiales/nuevo',methods=['post'])
+def nuevoEspecial():
+    espe = Especiales()
+    espe.nombre = request.form['nombre']
+    espe.descripcion=request.form['descripcion']
+    espe.costo=request.form['costo']
+    espe.insertar()
+    flash('Producto Especial registrado con exito')
+    return render_template('Especiales/Registrar.html')
+
+@app.route('/Especiales/Ver/<int:id>')
+def ConsultaIndEspecial(id):
+    espe = Especiales()
+    return render_template('Especiales/Modificar.html',espe=espe.consultaIndividual(id))
+
+@app.route('/Especiales/Modificar',methods=['post'])
+def ModificarEspeciales():
+    espe = Especiales()
+    espe.idEspeciales = request.form['idEspeciales']
+    espe.nombre = request.form['nombre']
+    espe.descripcion = request.form['descripcion']
+    espe.costo = request.form['costo']
+    espe.actualizar()
+    flash('La modificación del Tipo de Pago se realizó con exito')
+    return render_template('Especiales/Modificar.html',espe=espe)
+
+@app.route('/Especiales/eliminar/<int:id>')
+def eliminarEspecial(id):
+    espe=Especiales()
+    espe.eliminar(id)
+    return render_template('Especiales/Consultar.html', especiales=espe.consultaGeneral())
 
 
 if __name__ == '__main__':
